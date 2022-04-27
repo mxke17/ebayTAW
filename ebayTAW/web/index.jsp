@@ -11,14 +11,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    
+    <% 
+        String msjError = (String)request.getAttribute("error");
+        if (msjError == null) msjError="";
+    %>
+    
     <body>
         <h1>Bienvenidx a ebay</h1>
+        <%= msjError%>
         <form action="./Usuarios" method="POST">
         <table border="0">
             <tbody>
                 <tr>
-                    <td>Nick:</td>
-                    <td><input type="text" name="nick" value="" /></td>
+                    <td>Email:</td>
+                    <td><input type="text" name="email" value="" /></td>
                 </tr>
                 <tr>
                     <td>Contraseña:</td>

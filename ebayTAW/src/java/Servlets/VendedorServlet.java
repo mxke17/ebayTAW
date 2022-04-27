@@ -5,27 +5,20 @@
  */
 package Servlets;
 
-import Entity.Users;
-import Facades.UsersFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author mjura
  */
-@WebServlet(name = "Usuarios", urlPatterns = {"/Usuarios"})
-public class Usuarios extends HttpServlet {
-
-    @EJB
-    private UsersFacade usersFacade;
+@WebServlet(name = "VendedorServlet", urlPatterns = {"/VendedorServlet"})
+public class VendedorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,23 +31,18 @@ public class Usuarios extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("email");
-        String pass = request.getParameter("password");
-        Users usuario = this.usersFacade.comprobarUsuario(user, pass);
-        if (usuario == null){
-            String msjError = "Email o contraseña invalidas";
-            request.setAttribute("error", msjError);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            
-        } else if(usuario.getRol().equals("Vendedor")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/VendedorServlet");
-            
-        } else if(usuario.getRol().equals("Administrador")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/AdministradorServlet");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet VendedorServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet VendedorServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 

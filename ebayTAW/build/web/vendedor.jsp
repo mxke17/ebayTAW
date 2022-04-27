@@ -1,7 +1,7 @@
 <%-- 
-    Document   : newjsp
-    Created on : Apr 25, 2022, 12:33:52 PM
-    Author     : cristobal
+    Document   : vendedor
+    Created on : 27-abr-2022, 12:00:56
+    Author     : mjura
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Vendedor</h1>
     </body>
 </html>
