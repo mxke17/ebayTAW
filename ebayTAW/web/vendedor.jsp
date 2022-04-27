@@ -5,13 +5,21 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="Entity.Users"%>
+
 <!DOCTYPE html>
+<%
+    Users vendedor = (Users)session.getAttribute("usuario");
+    if (vendedor == null){
+        response.sendRedirect(request.getContextPath());
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Vendedor page</title>
     </head>
     <body>
-        <h1>Vendedor</h1>
+        <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
     </body>
 </html>
