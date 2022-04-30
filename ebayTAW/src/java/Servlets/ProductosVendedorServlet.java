@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mjura
  */
-@WebServlet(name = "VendedorServlet", urlPatterns = {"/VendedorServlet"})
-public class VendedorServlet extends HttpServlet {
+@WebServlet(name = "ProductosVendedorServlet", urlPatterns = {"/ProductosVendedorServlet"})
+public class ProductosVendedorServlet extends SampleTAWServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,8 +31,10 @@ public class VendedorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/Vendedor/vendedor.jsp").forward(request, response);
-        
+        if (super.comprobarSession(request, response)){
+            String filtro = request.getParameter("filtroTitulo");
+            //List<Cus>
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
