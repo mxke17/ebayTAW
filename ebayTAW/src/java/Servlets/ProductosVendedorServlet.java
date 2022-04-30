@@ -5,8 +5,12 @@
  */
 package Servlets;
 
+import DTO.ProductsDTO;
+import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ProductosVendedorServlet", urlPatterns = {"/ProductosVendedorServlet"})
 public class ProductosVendedorServlet extends SampleTAWServlet {
 
+    @EJB ProductService productService;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,7 +39,10 @@ public class ProductosVendedorServlet extends SampleTAWServlet {
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)){
             String filtro = request.getParameter("filtroTitulo");
-            //List<Cus>
+            List<ProductsDTO> productos = this.productService.listarProductos("filtroTitulo");
+            
+            request.setAttribute("productos", productos);
+            request.getRequestDispatcher("/WEB-INF/Vendedor/productos.jsp").forward(request, response);
         }
     }
 

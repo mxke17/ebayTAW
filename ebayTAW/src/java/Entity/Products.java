@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import DTO.ProductsDTO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -215,6 +216,23 @@ public class Products implements Serializable {
     @Override
     public String toString() {
         return "Entity.Products[ productID=" + productID + " ]";
+    }
+    
+    public ProductsDTO toDTO(){
+        ProductsDTO dto = new ProductsDTO();
+        dto.setProductID(productID);
+        dto.setTitle(title);
+        dto.setDescription(description);
+        dto.setInitialPrice(initialPrice);
+        dto.setPhoto(photo);
+        dto.setStartDate(startDate);
+        dto.setFinishDate(finishDate);
+        dto.setIsSold(isSold);
+        dto.setBidsList(bidsList);
+        dto.setCategoryID(categoryID);
+        dto.setUserID(userID);
+        
+        return dto;
     }
     
 }

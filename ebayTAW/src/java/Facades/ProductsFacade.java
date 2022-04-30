@@ -6,9 +6,11 @@
 package Facades;
 
 import Entity.Products;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -27,6 +29,13 @@ public class ProductsFacade extends AbstractFacade<Products> {
 
     public ProductsFacade() {
         super(Products.class);
+    }
+    
+    public List<Products> findByTitulo (String titulo){
+        Query q;
+        q = this.getEntityManager().createQuery("select p from Products p where p.title like :titulo");
+        q.setParameter("titutlo", '%' + titulo + '%');
+        return q.getResultList();
     }
     
 }
