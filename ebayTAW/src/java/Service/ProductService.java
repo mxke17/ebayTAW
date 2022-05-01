@@ -11,16 +11,18 @@ import Facades.ProductsFacade;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 
 /**
  *
  * @author mjura
  */
+@Stateless
 public class ProductService {
     
     @EJB ProductsFacade pf;
     
-    private List<ProductsDTO> listaEntityADTO (List<Products> lista){
+    public List<ProductsDTO> listaEntityADTO (List<Products> lista){
         List<ProductsDTO> listaDTO = null;
         if (lista != null){
             listaDTO = new ArrayList<>();

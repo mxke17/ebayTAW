@@ -34,7 +34,7 @@ public class ProductsFacade extends AbstractFacade<Products> {
     public List<Products> findByTitulo (String titulo){
         Query q;
         q = this.getEntityManager().createQuery("select p from Products p where p.title like :titulo");
-        q.setParameter("titutlo", '%' + titulo + '%');
+        q.setParameter("titulo", '%' + titulo + '%');
         return q.getResultList();
     }
     
