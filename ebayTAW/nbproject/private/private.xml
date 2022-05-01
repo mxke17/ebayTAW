@@ -3,11 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/UsersFacade.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/web/WEB-INF/Vendedor/productos.jsp</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/web/WEB-INF/Vendedor/vendedor.jsp</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/ProductosVendedorServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/Usuarios.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Service/UserService.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/web/index.jsp</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/DTO/UserDTO.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Entity/Users.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

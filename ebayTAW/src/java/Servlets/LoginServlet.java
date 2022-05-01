@@ -5,8 +5,10 @@
  */
 package Servlets;
 
+import DTO.UserDTO;
 import Entity.Users;
 import Facades.UsersFacade;
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -21,10 +23,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author mjura
  */
-@WebServlet(name = "Usuarios", urlPatterns = {"/Usuarios"})
-public class Usuarios extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+public class LoginServlet extends HttpServlet {
 
-    @EJB
+    @EJB UserService us;
     private UsersFacade usersFacade;
 
     /**
@@ -38,13 +40,15 @@ public class Usuarios extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("email");
+        String email = request.getParameter("email");
         String pass = request.getParameter("password");
-        Users usuario = this.usersFacade.comprobarUsuario(user, pass);
+        
+        UserDTO usuario = this.us.comprobarCredenciales(email, pass);
+        
         if (usuario == null){
             String msjError = "Email o contraseña invalidas";
             request.setAttribute("error", msjError);
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("").forward(request, response);
             
         } else if(usuario.getRol().equals("Vendedor")){
             HttpSession session = request.getSession();

@@ -20,7 +20,7 @@
     <body>
         <h1>Bienvenidx a ebay</h1>
         <%= msjError%>
-        <form action="./Usuarios" method="POST">
+        <form action="./LoginServlet" method="POST">
         <table border="0">
             <tbody>
                 <tr>

@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import DTO.UserDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -283,6 +284,25 @@ public class Users implements Serializable {
     @Override
     public String toString() {
         return "Entity.Users[ userID=" + userID + " ]";
+    }
+    
+    public UserDTO toDTO(){
+        UserDTO dto = new UserDTO();
+        dto.setRol(rol);
+        dto.setUsername(username);
+        dto.setPassword(password);
+        dto.setEmail(email);
+        dto.setName(name);
+        dto.setSurname(surname);
+        dto.setGender(gender);
+        dto.setStreet(street);
+        dto.setNumber(number);
+        dto.setCity(city);
+        dto.setRegion(region);
+        dto.setPostalCode(postalCode);
+        
+        return dto;
+       
     }
     
 }
