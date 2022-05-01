@@ -10,6 +10,7 @@ package DTO;
  * @author mjura
  */
 public class UserDTO {
+    private Integer userID;
     private String rol;
     private String username;
     private String password;
@@ -26,6 +27,14 @@ public class UserDTO {
     public UserDTO() {
     }
 
+    public Integer getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
+    
     public String getRol() {
         return rol;
     }

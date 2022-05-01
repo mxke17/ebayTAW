@@ -6,6 +6,8 @@
 package Servlets;
 
 import DTO.ProductsDTO;
+import DTO.UserDTO;
+import Entity.Users;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,13 +42,14 @@ public class ProductosVendedorServlet extends SampleTAWServlet {
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)){
             String filtro = request.getParameter("filtroTitulo");
-            List<ProductsDTO> productos = this.productService.listarProductos(filtro);
+            UserDTO vendedor = (UserDTO) request.getSession().getAttribute("usuario");
+            List<ProductsDTO> productos = this.productService.listarProductos(filtro, vendedor);
             
             request.setAttribute("productos", productos);
             request.getRequestDispatcher("/WEB-INF/Vendedor/productos.jsp").forward(request, response);
         }
     }
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

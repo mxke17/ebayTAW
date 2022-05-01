@@ -6,6 +6,7 @@
 package Service;
 
 import DTO.ProductsDTO;
+import DTO.UserDTO;
 import Entity.Products;
 import Facades.ProductsFacade;
 import java.util.ArrayList;
@@ -33,12 +34,14 @@ public class ProductService {
         return listaDTO;
     }
     
-    public List<ProductsDTO> listarProductos (String filtroTitulo){
+    
+    
+    public List<ProductsDTO> listarProductos (String filtroTitulo, UserDTO vendedor){
         List<Products> productos = null;
         if (filtroTitulo == null || filtroTitulo.isEmpty()){
-            productos = this.pf.findAll();
+            productos = this.pf.findAllByUser(vendedor);
         } else {
-            productos = this.pf.findByTitulo(filtroTitulo);
+            productos = this.pf.findByTitulo(filtroTitulo, vendedor);
         }
         
         return this.listaEntityADTO(productos);

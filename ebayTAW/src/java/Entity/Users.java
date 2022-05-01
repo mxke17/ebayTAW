@@ -288,6 +288,7 @@ public class Users implements Serializable {
     
     public UserDTO toDTO(){
         UserDTO dto = new UserDTO();
+        dto.setUserID(userID);
         dto.setRol(rol);
         dto.setUsername(username);
         dto.setPassword(password);

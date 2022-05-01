@@ -5,6 +5,7 @@
  */
 package Facades;
 
+import DTO.UserDTO;
 import Entity.Products;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -31,10 +32,18 @@ public class ProductsFacade extends AbstractFacade<Products> {
         super(Products.class);
     }
     
-    public List<Products> findByTitulo (String titulo){
+    public List<Products> findAllByUser (UserDTO vendedor){
         Query q;
-        q = this.getEntityManager().createQuery("select p from Products p where p.title like :titulo");
+        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor");
+        q.setParameter("vendedor", vendedor.getUserID());
+        return q.getResultList();
+    }
+    
+    public List<Products> findByTitulo (String titulo, UserDTO vendedor){
+        Query q;
+        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor AND p.title like :titulo");
         q.setParameter("titulo", '%' + titulo + '%');
+        q.setParameter("vendedor", vendedor.getUserID());
         return q.getResultList();
     }
     
