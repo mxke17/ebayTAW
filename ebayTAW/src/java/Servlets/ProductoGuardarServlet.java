@@ -5,29 +5,30 @@
  */
 package Servlets;
 
-import DTO.UserDTO;
-import Entity.Users;
-import Facades.UsersFacade;
-import Service.UserService;
+import Entity.Products;
+import Facades.ProductsFacade;
+import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author mjura
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "ProductoGuardarServlet", urlPatterns = {"/ProductoGuardarServlet"})
+public class ProductoGuardarServlet extends SampleTAWServlet {
 
-    @EJB UserService us;
-
+    @EJB ProductService ps;
+    private ProductsFacade pf;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,27 +40,24 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        
-        UserDTO usuario = this.us.comprobarCredenciales(email, pass);
-        
-        if (usuario == null){
-            String msjError = "Email o contraseña invalidas";
-            request.setAttribute("error", msjError);
-            request.getRequestDispatcher("").forward(request, response);
+        if (super.comprobarSession(request, response)){
+            String id = request.getParameter("id");
+            String titulo = request.getParameter("titulo");
+            String descripcion = request.getParameter("descripcion");
+            String precioInicial = request.getParameter("precioInicial");
+            BigDecimal pInicial = new BigDecimal(precioInicial);
+            String linkFoto = request.getParameter("linkFoto");
+            //String fechaInicio = request.getParameter("fechaInicio");
+            //Date fInicio = new Date(fechaInicio);
+            //String fechaFin = request.getParameter("fechaFin");
+            //Date fFin = new Date(fechaFin);
+            String vendido = request.getParameter("vendido");
             
-        } else if(usuario.getRol().equals("Vendedor")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
+            //this.ps.editarProducto(Integer.parseInt(id), titulo, descripcion, pInicial, linkFoto, fInicio, fFin, Boolean.valueOf(vendido));
+            this.ps.editarProductoBorrarLuego(Integer.parseInt(id), titulo, descripcion, pInicial, linkFoto, Boolean.valueOf(vendido));
             response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-            //response.sendRedirect(request.getContextPath() + "/VendedorServlet");
-            
-        } else if(usuario.getRol().equals("Administrador")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/AdministradorServlet");
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

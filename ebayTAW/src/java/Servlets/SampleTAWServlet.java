@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author mjura
  */
-@WebServlet(name = "SampleTAWServlet", urlPatterns = {"/SampleTAWServlet"})
+
 public abstract class SampleTAWServlet extends HttpServlet {
     @Override
     protected abstract void doGet(HttpServletRequest request, HttpServletResponse response)

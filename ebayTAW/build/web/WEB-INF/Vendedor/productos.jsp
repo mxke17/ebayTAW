@@ -15,9 +15,19 @@
         response.sendRedirect(request.getContextPath());
     }
 %>
-<html>
+
+
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
     <body>
         <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
+        
+        <!-- TABLA PRODUCTOS -->
         <form method="post" action="ProductosVendedorServlet">
             Titulo: <input type="text" name="filtroTitulo" value="">
             <input type="submit" value="Filtrar">
@@ -58,8 +68,8 @@
             <td><%= producto.getStartDate() %></td>
             <td><%= producto.getFinishDate() %></td>
             <td><%= producto.getIsSold() %></td>
-            <td></td>
-            <td></td>
+            <td><a href="ProductoBorrarServlet?id=<%= producto.getProductID() %>">Borrar</a></td>
+            <td><a href="CrearEditarProducto?id=<%= producto.getProductID() %>">Editar</a></td>
         </tr>
         
         <% 

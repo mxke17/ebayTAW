@@ -5,10 +5,8 @@
  */
 package Servlets;
 
-import DTO.UserDTO;
-import Entity.Users;
-import Facades.UsersFacade;
-import Service.UserService;
+import DTO.ProductsDTO;
+import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
@@ -17,17 +15,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author mjura
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "CrearEditarProducto", urlPatterns = {"/CrearEditarProducto"})
+public class CrearEditarProducto extends SampleTAWServlet {
 
-    @EJB UserService us;
-
+    @EJB ProductService ps;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,27 +36,14 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        
-        UserDTO usuario = this.us.comprobarCredenciales(email, pass);
-        
-        if (usuario == null){
-            String msjError = "Email o contraseña invalidas";
-            request.setAttribute("error", msjError);
-            request.getRequestDispatcher("").forward(request, response);
-            
-        } else if(usuario.getRol().equals("Vendedor")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-            //response.sendRedirect(request.getContextPath() + "/VendedorServlet");
-            
-        } else if(usuario.getRol().equals("Administrador")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/AdministradorServlet");
+        if(super.comprobarSession(request, response)){
+            String idProducto = request.getParameter("id");
+            if (idProducto != null && !request.getParameter("id").isEmpty()){ //EDITAR
+                ProductsDTO producto = this.ps.buscarProducto(Integer.parseInt(idProducto));
+                request.setAttribute("producto", producto);
+            }
         }
+        request.getRequestDispatcher("/WEB-INF/Vendedor/editProducto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
