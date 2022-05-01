@@ -12,19 +12,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="administrador_usuarios.jsp">
+        <a href="/ebayTAW/Administrador/administrador_usuarios.jsp">
             <button > USUARIOS </button>
         </a>
         
         <br>
         
-        <a href="administrador_productos.jsp">
+        <a href="/WEB-INF/Administrador/administrador_productos.jsp">
             <button> PRODUCTOS </button>
         </a>
         
         <br>
         
-        <a href="administrador_categorias.jsp">
+        <a href="/WEB-INF/Administrador/administrador_categorias.jsp">
             <button> CATEGORIAS </button>
         </a>
     </body>

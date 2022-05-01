@@ -39,7 +39,6 @@ public class ProductosVendedorServlet extends SampleTAWServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)){
-            System.out.println("Cristobal");
             String filtro = request.getParameter("filtroTitulo");
             List<ProductsDTO> productos = this.productService.listarProductos(filtro);
             
