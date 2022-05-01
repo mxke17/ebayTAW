@@ -18,10 +18,10 @@ public class UserDTO {
     private String surname;
     private String gender;
     private String street;
-    private int number;
+    private Integer number;
     private String city;
     private String region;
-    private int postalCode;
+    private Integer postalCode;
    
     public UserDTO() {
     }
@@ -106,7 +106,7 @@ public class UserDTO {
         this.street = street;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 
@@ -118,7 +118,7 @@ public class UserDTO {
         this.region = region;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(Integer postalCode) {
         this.postalCode = postalCode;
     }
     
