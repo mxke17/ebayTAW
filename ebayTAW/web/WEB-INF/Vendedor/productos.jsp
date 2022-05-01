@@ -5,11 +5,19 @@
 --%>
 
 <%@page import="DTO.ProductsDTO"%>
+<%@page import="DTO.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    UserDTO vendedor = (UserDTO)session.getAttribute("usuario");
+    if (vendedor == null){
+        response.sendRedirect(request.getContextPath());
+    }
+%>
 <html>
     <body>
+        <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
         <form method="post" action="ProductosVendedorServlet">
             Titulo: <input type="text" name="filtroTitulo" value="">
             <input type="submit" value="Filtrar">

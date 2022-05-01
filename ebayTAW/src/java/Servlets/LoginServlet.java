@@ -27,7 +27,6 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 
     @EJB UserService us;
-    private UsersFacade usersFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

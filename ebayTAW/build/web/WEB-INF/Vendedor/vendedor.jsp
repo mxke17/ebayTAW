@@ -5,11 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="Entity.Users"%>
+<%@page import="DTO.UserDTO"%>
 
 <!DOCTYPE html>
 <%
-    Users vendedor = (Users)session.getAttribute("usuario");
+    UserDTO vendedor = (UserDTO)session.getAttribute("usuario");
     if (vendedor == null){
         response.sendRedirect(request.getContextPath());
     }

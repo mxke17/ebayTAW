@@ -32,7 +32,7 @@ public abstract class SampleTAWServlet extends HttpServlet {
     protected boolean comprobarSession (HttpServletRequest request, HttpServletResponse response) 
                 throws ServletException, IOException {
         HttpSession session = request.getSession();
-        UserDTO usuario = (UserDTO)session.getAttribute("email");
+        UserDTO usuario = (UserDTO)session.getAttribute("usuario");
         if (usuario == null){
             response.sendRedirect(request.getContextPath());
             return false;

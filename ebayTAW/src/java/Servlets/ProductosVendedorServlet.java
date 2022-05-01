@@ -9,6 +9,7 @@ import DTO.ProductsDTO;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Clock;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -38,8 +39,9 @@ public class ProductosVendedorServlet extends SampleTAWServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)){
+            System.out.println("Cristobal");
             String filtro = request.getParameter("filtroTitulo");
-            List<ProductsDTO> productos = this.productService.listarProductos("filtroTitulo");
+            List<ProductsDTO> productos = this.productService.listarProductos(filtro);
             
             request.setAttribute("productos", productos);
             request.getRequestDispatcher("/WEB-INF/Vendedor/productos.jsp").forward(request, response);

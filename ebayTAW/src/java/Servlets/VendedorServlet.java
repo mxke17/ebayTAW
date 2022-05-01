@@ -31,7 +31,7 @@ public class VendedorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/Vendedor/vendedor.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/Vendedor/productos.jsp").forward(request, response);
         
     }
 
