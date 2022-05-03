@@ -71,7 +71,7 @@
     <body>
         
         <div class="topnav">
-            <li style="float:right"><a class="active" href="/WEB-INF/Vendedor/registroVendedor.jsp">Registrate como vendedor</a></li>
+            <li style="float:right"><a class="active" href="registroVendedorServlet">Registrate como vendedor</a></li>
         </div>
 
         <div class="content">
