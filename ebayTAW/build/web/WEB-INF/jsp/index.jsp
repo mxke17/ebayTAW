@@ -51,7 +51,6 @@
             .content {
                 background-color: #ddd;
                 padding: 10px;
-                height: 200px; /* Should be removed. Only for demonstration */
             }
             
             /* Style the footer */
@@ -71,6 +70,7 @@
     <body>
         
         <div class="topnav">
+            <li style="float:right"><a class="active" href="registroVendedorServlet">Home</a></li>
             <li style="float:right"><a class="active" href="registroVendedorServlet">Registrate como vendedor</a></li>
         </div>
 
