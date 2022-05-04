@@ -8,6 +8,9 @@ package Service;
 import DTO.UserDTO;
 import Entity.Users;
 import Facades.UsersFacade;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -17,6 +20,10 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class UserService {
+    
+    public List<UserDTO> listaEntityADTO (List<Users> lista){
+        return lista.stream().map(u -> u.toDTO()).collect(Collectors.toList());
+    }
     
     @EJB UsersFacade uf;
     public UserDTO comprobarCredenciales (String email, String pass){
@@ -44,5 +51,12 @@ public class UserService {
         this.uf.create(vendedor);
     }
     
+    public List<UserDTO> listarUsuarios(){
+        List<Users> users = null;
+
+        users = this.uf.findAll();
+    
+        return this.listaEntityADTO(users);
+    }
     
 }

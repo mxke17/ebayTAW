@@ -5,29 +5,28 @@
  */
 package Servlets;
 
+import DTO.ProductsDTO;
 import DTO.UserDTO;
-import Entity.Users;
-import Facades.UsersFacade;
-import Service.UserService;
+import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author mjura
+ * @author cristobal
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "AdministradorProductosServlet", urlPatterns = {"/AdministradorProductosServlet"})
+public class AdministradorProductosServlet extends SampleTAWServlet {
 
-    @EJB UserService us;
-
+    @EJB ProductService productService;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,26 +38,12 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
-        
-        UserDTO usuario = this.us.comprobarCredenciales(email, pass);
-        
-        if (usuario == null){
-            String msjError = "Email o contraseña invalidas";
-            request.setAttribute("error", msjError);
-            request.getRequestDispatcher("").forward(request, response);
+        if (super.comprobarSession(request, response)){
+            String filtro = request.getParameter("filtroTitulo");
+            List<ProductsDTO> productos = this.productService.listarProductos(filtro);
             
-        } else if(usuario.getRol().equals("Vendedor")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-            //response.sendRedirect(request.getContextPath() + "/VendedorServlet");
-            
-        } else if(usuario.getRol().equals("Administrador")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/AdministradorUsuariosServlet");
+            request.setAttribute("productos", productos);
+            request.getRequestDispatcher("/WEB-INF/Administrador/administrador_productos.jsp").forward(request, response);
         }
     }
 

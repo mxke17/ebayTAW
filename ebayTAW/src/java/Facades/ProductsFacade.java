@@ -39,6 +39,13 @@ public class ProductsFacade extends AbstractFacade<Products> {
         q.setParameter("vendedor", vendedor.getUserID());
         return q.getResultList();
     }
+
+    public List<Products> findAllByTitulo (String titulo){
+        Query q;
+        q = this.getEntityManager().createQuery("select p from Products p WHERE p.title like :titulo");
+        q.setParameter("titulo", '%' + titulo + '%');
+        return q.getResultList();
+    }
     
     public List<Products> findByTitulo (String titulo, UserDTO vendedor){
         Query q;

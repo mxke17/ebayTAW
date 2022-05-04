@@ -67,7 +67,7 @@ public class UserDTO {
         return street;
     }
 
-    public int getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
@@ -79,7 +79,7 @@ public class UserDTO {
         return region;
     }
 
-    public int getPostalCode() {
+    public Integer getPostalCode() {
         return postalCode;
     }
 

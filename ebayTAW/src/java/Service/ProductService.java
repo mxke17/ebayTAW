@@ -35,7 +35,17 @@ public class ProductService {
         }
         return listaDTO;
     }
-    
+
+    public List<ProductsDTO> listarProductos (String filtroTitulo){
+        List<Products> productos = null;
+        if (filtroTitulo == null || filtroTitulo.isEmpty()){
+            productos = this.pf.findAll();
+        } else {
+            productos = this.pf.findAllByTitulo(filtroTitulo);
+        }
+        
+        return this.listaEntityADTO(productos);
+    }    
 
     public List<ProductsDTO> listarProductos (String filtroTitulo, UserDTO vendedor){
         List<Products> productos = null;

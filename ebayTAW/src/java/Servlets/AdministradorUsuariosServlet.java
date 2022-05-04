@@ -5,8 +5,13 @@
  */
 package Servlets;
 
+import DTO.ProductsDTO;
+import DTO.UserDTO;
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,11 +20,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author mjura
+ * @author cristobal
  */
-@WebServlet(name = "AdministradorServlet", urlPatterns = {"/AdministradorServlet"})
-public class AdministradorServlet extends HttpServlet {
+@WebServlet(name = "AdministradorUsuariosServlet", urlPatterns = {"/AdministradorUsuariosServlet"})
+public class AdministradorUsuariosServlet extends SampleTAWServlet {
 
+    @EJB UserService userService;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,8 +36,14 @@ public class AdministradorServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/Administrador/administrador.jsp").forward(request, response);
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (super.comprobarSession(request, response)){
+            List<UserDTO> usuarios = this.userService.listarUsuarios();
+            
+            request.setAttribute("usuarios", usuarios);
+            request.getRequestDispatcher("/WEB-INF/Administrador/administrador_usuarios.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
