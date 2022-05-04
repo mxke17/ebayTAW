@@ -5,8 +5,10 @@
  */
 package Servlets;
 
+import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mjura
  */
-@WebServlet(name = "registroVendedorServlet", urlPatterns = {"/registroVendedorServlet"})
-public class registroVendedorServlet extends HttpServlet {
+@WebServlet(name = "newUserVendedorServlet", urlPatterns = {"/newUserVendedorServlet"})
+public class newUserVendedorServlet extends SampleTAWServlet {
 
+    @EJB UserService us;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,8 +34,31 @@ public class registroVendedorServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("WEB-INF/Vendedor/registroVendedor.jsp").forward(request, response);
+        if(super.comprobarSession(request, response)){
+            String nick = request.getParameter("nick");
+            String email = request.getParameter("email");
+            String pass = request.getParameter("pass");
+            String nombre = request.getParameter("nombre");
+            String apellidos = request.getParameter("apellidos");
+            String genero = request.getParameter("genero");
+            //Convertir
+            String calle = request.getParameter("calle");
+            String $numero = request.getParameter("numero");
+            //Convertir
+            int numero = Integer.parseInt($numero);
+            String ciudad = request.getParameter("ciudad");
+            String $cpostal = request.getParameter("cPostal");
+            //Convertir
+            int cpostal = Integer.parseInt($cpostal);
+            String region = request.getParameter("region");
+            
+            
+            if ((nick != null || !nick.isEmpty()) && (email != null || !email.isEmpty()) && (pass != null || !pass.isEmpty())){ // Nick, email y pass rellenas
+                this.us.crearVendedor(nick, email, pass, nombre, apellidos, genero, calle, numero, ciudad, cpostal, region);
+                response.sendRedirect("/LoginServlet");
+            }
+            
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

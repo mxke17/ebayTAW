@@ -23,11 +23,38 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <style>
+            * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            /* Style the content */
+            .content {
+                background-color: #ddd;
+                padding: 10px;
+            }
+            
+            /* Style the footer */
+            .footer {
+                background-color: #f1f1f1;
+                padding: 10px;
+            }
+        </style>
+        
     </head>
     <body>
         <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
         
         <!-- TABLA PRODUCTOS -->
+        <div class="content">
+            <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
         <form method="post" action="ProductosVendedorServlet">
             Titulo: <input type="text" name="filtroTitulo" value="">
             <input type="submit" value="Filtrar">
@@ -81,5 +108,6 @@
         <% 
             }
         %>
+        </div>
     </body>
 </html>

@@ -21,22 +21,62 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"-->
         <title><%=vendedor.getUsername()%> page</title>
+        
+        <style>
+            * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            /* Style the top navigation bar */
+            .topnav {
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            /* Style the topnav links */
+            .topnav a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                
+            }
+
+            /* Change color on hover */
+            .topnav a:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            /* Style the content */
+            .content {
+                background-color: #ddd;
+                padding: 10px;
+            }
+        </style>
+        
     </head>
-    <table width="80%">
-        <tr width="80%">
-            <td>Session ID: <%=session.getId()%></td>
-            <td><a href="ProductosVendedorServlet">Listado de productos</a></td>
-            <td><a href="LogoutServlet">Salir</a></td>
-        </tr>
-    </table>
+    
     
     <body>
-        <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
-        <!--
-        <form method="post" action="ProductosVendedorServlet">
-            Titulo: <input type="text" name="filtroTitulo" value="">
-            <input type="submit" value="Filtrar">
-        </form>
-        -->
+        
+        <div class="topnav">
+            <li style="float:right"><a href="LogoutServlet">Salir</a></li>
+            <li style="float:right"><a href="ProductosVendedorServlet">Lista de productos</a></li>
+            <li style="float:right"><a href="">Nuevo producto</a></li>
+            
+        </div>
+
+        <div class="content">
+            <p>Session ID: <%=session.getId()%></p>
+        </div>
     </body>
 </html>

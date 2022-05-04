@@ -56,8 +56,27 @@
                         <td><input type="text" name="fechaFin" value="<%= producto.getFinishDate() %>"></td>
                     </tr>
                     <tr>
-                        <td><label for="">Vendido?</label></td>
-                        <td><input type="text" name="vendido" value="<%= producto.getIsSold() %>"></td>
+                        <td><label for="">¿Vendido?</label></td>
+                        <%
+                            Boolean valor = producto.getIsSold();
+                            if (valor){ // True
+                        %>
+                        <td><input type="radio" name="vendido" value="True" checked/>Vendido</td><br>
+                        <td><input type="radio" name="enVenta" value="False" />En venta</td>
+                        <%
+                            } else {
+                        %>
+                        <td><input type="radio" name="vendido" value="True"/>Vendido</td><br>
+                        <td><input type="radio" name="enVenta" value="False" checked/>En venta<br></td>
+                        <%
+                          }
+                        %>
+                        
+                        
+                        
+                        <!--<td><input type="text" name="vendido" value="<%= producto.getIsSold() %>"></td>
+                        <td><input type="radio" name="vendido" value="True" />Vendido<br></td>
+                        <td><input type="radio" name="enVenta" value="False" />En venta<br></td>-->
                     </tr>
                 </tbody>
             </table>

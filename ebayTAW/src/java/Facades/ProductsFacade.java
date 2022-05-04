@@ -34,7 +34,8 @@ public class ProductsFacade extends AbstractFacade<Products> {
     
     public List<Products> findAllByUser (UserDTO vendedor){
         Query q;
-        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor");
+        //q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor");
+        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor ORDER BY p.userID DESC");
         q.setParameter("vendedor", vendedor.getUserID());
         return q.getResultList();
     }
