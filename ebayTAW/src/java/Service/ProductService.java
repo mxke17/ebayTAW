@@ -36,6 +36,7 @@ public class ProductService {
         return listaDTO;
     }
 
+    // Cristobal
     public List<ProductsDTO> listarProductos (String filtroTitulo){
         List<Products> productos = null;
         if (filtroTitulo == null || filtroTitulo.isEmpty()){
@@ -47,6 +48,7 @@ public class ProductService {
         return this.listaEntityADTO(productos);
     }    
 
+    // Miguel
     public List<ProductsDTO> listarProductos (String filtroTitulo, UserDTO vendedor){
         List<Products> productos = null;
         if (filtroTitulo == null || filtroTitulo.isEmpty()){
