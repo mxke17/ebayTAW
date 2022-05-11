@@ -5,10 +5,14 @@
  */
 package Servlets;
 
+import DTO.CategoriesDTO;
 import DTO.ProductsDTO;
+import Entity.Categories;
+import Service.CategoriesService;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "CrearEditarProducto", urlPatterns = {"/CrearEditarProducto"})
 public class CrearEditarProducto extends SampleTAWServlet {
 
+    @EJB
+    private CategoriesService cs;
+
     @EJB ProductService ps;
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,12 +45,19 @@ public class CrearEditarProducto extends SampleTAWServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if(super.comprobarSession(request, response)){
-            String idProducto = request.getParameter("id");
-            if (idProducto != null && !request.getParameter("id").isEmpty()){ //EDITAR
+            String idProducto = request.getParameter("id"); //EDITAR
+            List<CategoriesDTO> categorias = null;
+            categorias = this.cs.findAll();
+            
+            if (idProducto != null && !request.getParameter("id").isEmpty()){ 
                 ProductsDTO producto = this.ps.buscarProducto(Integer.parseInt(idProducto));
                 request.setAttribute("producto", producto);
+                request.setAttribute("categorias", categorias);
+            } else { // CREAR
+                
             }
         }
+        
         request.getRequestDispatcher("/WEB-INF/Vendedor/editProducto.jsp").forward(request, response);
     }
 

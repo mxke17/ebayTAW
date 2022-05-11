@@ -58,6 +58,7 @@ public class ProductsFacade extends AbstractFacade<Products> {
         return q.getResultList();
     }
     
+    // Miguel
     public List<Products> findByVendidoTrue (){
         
         return null;
