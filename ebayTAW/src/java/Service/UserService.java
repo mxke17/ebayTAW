@@ -31,24 +31,48 @@ public class UserService {
         return usuario.toDTO();
     }
     
-    public void crearVendedor(String username, String email, String password, 
-            String nombre, String apellidos, String genero, String calle, 
-            Integer numero, String ciudad, Integer cpostal, String region){
-        Users vendedor = new Users();
-        // Relleno los datos
-        vendedor.setRol("Vendedor");
-        vendedor.setUsername(username);
-        vendedor.setEmail(email);
-        vendedor.setPassword(password);
-        vendedor.setName(nombre);
-        vendedor.setSurname(apellidos);
-        vendedor.setGender(genero);
-        vendedor.setStreet(calle);
-        vendedor.setNumber(numero);
-        vendedor.setCity(ciudad);
-        vendedor.setRegion(region);
-        vendedor.setPostalCode(cpostal);
-        this.uf.create(vendedor);
+    public void crearVendedor(String nick, String email, String pass, String nombre, String apellidos, String genero, String calle, String $numero, String ciudad, String $cPostal, String region){
+        Users nUser = new Users();
+        
+        nUser.setUsername(nick);
+        nUser.setEmail(email);
+        nUser.setPassword(pass);
+
+        if (nombre != null || !nombre.isEmpty()){
+            nUser.setName(nombre);
+        }
+
+        if (apellidos != null || !apellidos.isEmpty()){
+            nUser.setSurname(apellidos);
+        }
+        
+        // Error aqui
+        if (genero != null || !genero.isEmpty()){
+            nUser.setGender(genero);
+        }
+
+        if (calle != null || !calle.isEmpty()){
+            nUser.setStreet(calle);
+        }
+
+        if ($numero != null || !$numero.isEmpty()){
+            nUser.setNumber(Integer.parseInt($numero));
+        }
+
+        if (ciudad != null || !ciudad.isEmpty()){
+            nUser.setCity(ciudad);
+        }
+
+        if ($cPostal != null || !$cPostal.isEmpty()){
+            nUser.setPostalCode(Integer.parseInt($cPostal));
+        }
+
+        if (region != null || region.isEmpty()){
+            nUser.setRegion(region);
+        }
+
+        nUser.setRol("Vendedor");
+        this.uf.create(nUser);
     }
     
     public List<UserDTO> listarUsuarios(){

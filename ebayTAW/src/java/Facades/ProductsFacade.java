@@ -32,14 +32,16 @@ public class ProductsFacade extends AbstractFacade<Products> {
         super(Products.class);
     }
     
+    // Miguel
     public List<Products> findAllByUser (UserDTO vendedor){
         Query q;
         //q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor");
-        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor ORDER BY p.userID DESC");
+        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor ORDER BY p.productID DESC");
         q.setParameter("vendedor", vendedor.getUserID());
         return q.getResultList();
     }
 
+    // Cristobal
     public List<Products> findAllByTitulo (String titulo){
         Query q;
         q = this.getEntityManager().createQuery("select p from Products p WHERE p.title like :titulo");
@@ -47,12 +49,19 @@ public class ProductsFacade extends AbstractFacade<Products> {
         return q.getResultList();
     }
     
+    // Miguel
     public List<Products> findByTitulo (String titulo, UserDTO vendedor){
         Query q;
-        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor AND p.title like :titulo");
+        q = this.getEntityManager().createQuery("select p from Products p WHERE p.userID.userID = :vendedor AND p.title like :titulo ORDER BY P.productID DESC");
         q.setParameter("titulo", '%' + titulo + '%');
         q.setParameter("vendedor", vendedor.getUserID());
         return q.getResultList();
+    }
+    
+    // Miguel
+    public List<Products> findByVendidoTrue (){
+        
+        return null;
     }
     
 }

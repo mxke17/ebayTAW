@@ -4,6 +4,7 @@
     Author     : mjura
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DTO.ProductsDTO"%>
 <%@page import="DTO.UserDTO"%>
 <%@page import="java.util.List"%>
@@ -57,10 +58,19 @@
             <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
         <form method="post" action="ProductosVendedorServlet">
             Titulo: <input type="text" name="filtroTitulo" value="">
-            <input type="submit" value="Filtrar">
+            <input type="submit" value="Filtrar por título">
         </form>
         
+        <br>
+        
+        <form method="" action="">
+            ¿Vendido?: 
+        </form>
+        
+        
         <% 
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            
             List<ProductsDTO> productos = (List)request.getAttribute("productos");
             if ( productos == null || productos.isEmpty()){
         %>
@@ -73,7 +83,8 @@
         <table border="1">
             <tr>
                 <th>Titutlo</th>
-                <th>Descripcion</th>                
+                <th>Descripcion</th>
+                <th>Categoria</th>                
                 <th>Precio Inicial</th>                                
                 <th>Link foto</th>     
                 <th>Fecha inicio</th>                     
@@ -90,10 +101,11 @@
         <tr>
             <td><%= producto.getTitle() %></td>
             <td><%= producto.getDescription() %></td>
+            <td><%= producto.getCategoryID().getName() %></td>
             <td><%= producto.getInitialPrice() %></td>
             <td><%= producto.getPhoto() %></td>
-            <td><%= producto.getStartDate() %></td>
-            <td><%= producto.getFinishDate() %></td>
+            <td><%= format.format(producto.getStartDate())%></td>
+            <td><%= format.format(producto.getFinishDate())%></td>
             <td><%= producto.getIsSold() %></td>
             <td><a href="ProductoBorrarServlet?id=<%= producto.getProductID() %>">Borrar</a></td>
             <td><a href="CrearEditarProducto?id=<%= producto.getProductID() %>">Editar</a></td>

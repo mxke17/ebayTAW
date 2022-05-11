@@ -5,13 +5,20 @@
  */
 package Servlets;
 
+import DTO.CategoriesDTO;
+import Entity.Categories;
 import Entity.Products;
 import Facades.ProductsFacade;
+import Service.CategoriesService;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +34,8 @@ import javax.servlet.http.HttpServletResponse;
 public class ProductoGuardarServlet extends SampleTAWServlet {
 
     @EJB ProductService ps;
-    private ProductsFacade pf;
+    @EJB CategoriesService cs;
+    //private ProductsFacade pf;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,17 +52,32 @@ public class ProductoGuardarServlet extends SampleTAWServlet {
             String id = request.getParameter("id");
             String titulo = request.getParameter("titulo");
             String descripcion = request.getParameter("descripcion");
+            String categoria = request.getParameter("categoria");
             String precioInicial = request.getParameter("precioInicial");
             BigDecimal pInicial = new BigDecimal(precioInicial);
             String linkFoto = request.getParameter("linkFoto");
-            //String fechaInicio = request.getParameter("fechaInicio");
-            //Date fInicio = new Date(fechaInicio);
-            //String fechaFin = request.getParameter("fechaFin");
-            //Date fFin = new Date(fechaFin);
-            String vendido = request.getParameter("vendido");
+            String fechaInicio = request.getParameter("fechaInicio");
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            Date fInicio = null;
             
-            //this.ps.editarProducto(Integer.parseInt(id), titulo, descripcion, pInicial, linkFoto, fInicio, fFin, Boolean.valueOf(vendido));
-            this.ps.editarProductoBorrarLuego(Integer.parseInt(id), titulo, descripcion, pInicial, linkFoto, Boolean.valueOf(vendido));
+            try {
+                fInicio = format.parse(fechaInicio);
+            } catch (ParseException ex) {
+                Logger.getLogger(ProductoGuardarServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String fechaFin = request.getParameter("fechaFin");
+            Date fFin = null;
+            try {
+                fFin = format.parse(fechaFin);
+            } catch (ParseException ex) {
+                Logger.getLogger(ProductoGuardarServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            String vendido = request.getParameter("vendido");
+            Boolean v = Boolean.parseBoolean(vendido);
+            
+            this.ps.editarProducto(Integer.parseInt(id), titulo, descripcion, categoria, pInicial, linkFoto, fInicio, fFin, v);
+            
             response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
         }
         

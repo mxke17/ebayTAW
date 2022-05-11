@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import DTO.CategoriesDTO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -121,6 +122,17 @@ public class Categories implements Serializable {
     @Override
     public String toString() {
         return "Entity.Categories[ categoryID=" + categoryID + " ]";
+    }
+    
+    // Miguel
+    public CategoriesDTO toDTO(){
+        CategoriesDTO dto = new CategoriesDTO();
+        dto.setCategoriesuserList(categoriesuserList);
+        dto.setCategoryID(categoryID);
+        dto.setName(name);
+        dto.setProductsList(productsList);
+        
+        return dto;
     }
     
 }
