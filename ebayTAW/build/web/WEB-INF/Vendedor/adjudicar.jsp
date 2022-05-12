@@ -4,6 +4,9 @@
     Author     : mjura
 --%>
 
+<%@page import="Entity.Users"%>
+<%@page import="java.math.BigDecimal"%>
+<%@page import="DTO.UserDTO"%>
 <%@page import="Entity.Bids"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DTO.ProductsDTO"%>
@@ -11,6 +14,10 @@
 <!DOCTYPE html>
 
 <%
+    UserDTO vendedor = (UserDTO)session.getAttribute("usuario");
+    if (vendedor == null){
+        response.sendRedirect(request.getContextPath());
+    }
     ProductsDTO producto = (ProductsDTO)request.getAttribute("producto");
     SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 %>
@@ -57,15 +64,26 @@
                 </tr>
             </thead>
             <tbody>
-                <%for (Bids puja:producto.getBidsList()){%>
+                <%BigDecimal pujaMasAlta = new BigDecimal(0);
+                Users pujador = null;
+                for (Bids puja:producto.getBidsList()){
+                if (puja.getPrice().compareTo(pujaMasAlta)>=1){ 
+                    pujaMasAlta = puja.getPrice();
+                    pujador = puja.getUserID();
+                } %>
                 <tr>
-                    <td><%= puja.getUserID().getName() %> <%= puja.getUserID().getSurname() %></td>
-                    <td><%= puja.getBidID() %></td>
+                    <td><%= puja.getUserID().getUsername() %></td>
+                    <td><%= puja.getPrice() %> € </td>
                 </tr>
                 <%}%>
             </tbody>
         </table>
-
+        <p><%= vendedor.getUsername()%>, la puja mas alta ha sido de <%= pujador.getUsername() %> por <%= pujaMasAlta%> € </p>
+        <form action="VendedorAdjudicarVentaServlet" method="Post">
+            <p>¿Confirmas la venta?</p>
+            <input type="hidden" name="producto" value="<%= producto.getProductID() %>" />
+            <input type="submit" value="Confirmar" />
+        </form>
         <%}%>
     </body>
 </html>

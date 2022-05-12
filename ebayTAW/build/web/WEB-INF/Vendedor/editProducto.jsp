@@ -26,7 +26,7 @@
         <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
         
         <%
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ProductsDTO producto = (ProductsDTO)request.getAttribute("producto");
             List<CategoriesDTO> categorias = (List)request.getAttribute("categorias");
         %>
@@ -57,7 +57,7 @@
                     </tr>
                     <tr>
                         <td><label for="">Precio Inicial:</label></td>
-                        <td><input required type="number" name="precioInicial" value="<%= producto.getInitialPrice() %>"></td>
+                        <td><input required type="number" name="precioInicial" step="any" min="0" value="<%= producto.getInitialPrice() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Link foto:</label></td>

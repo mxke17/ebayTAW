@@ -100,7 +100,7 @@
             <td><%= producto.getTitle() %></td>
             <td><%= producto.getDescription() %></td>
             <td><%= producto.getCategoryID().getName() %></td>
-            <td><%= producto.getInitialPrice() %></td>
+            <td><%= producto.getInitialPrice() %> €</td>
             <td><%= producto.getPhoto() %></td>
             <td><%= format.format(producto.getStartDate())%></td>
             <td><%= format.format(producto.getFinishDate())%></td>
@@ -108,8 +108,8 @@
             <td><a href="ProductoBorrarServlet?id=<%= producto.getProductID() %>">Borrar</a></td>
             <td><a href="CrearEditarProducto?id=<%= producto.getProductID() %>">Editar</a></td>
             <td><% Date date = new Date();
-                if (date.after(producto.getFinishDate())){ %>
-                    <a href="VendedorToAdjudicarServlet?id=<%= producto.getProductID() %>">Adjudicar</a></td>
+                if (date.after(producto.getFinishDate()) && producto.getIsSold() == false){ %>
+                    <a href="VendedorToAdjudicarServlet?id=<%= producto.getProductID()%>">Adjudicar</a></td>
                 <%}%></td>
         </tr>
         
