@@ -4,6 +4,7 @@
     Author     : cristobal
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DTO.CategoriesDTO"%>
 <%@page import="DTO.ProductsDTO"%>
 <%@page import="DTO.UserDTO"%>
@@ -49,7 +50,6 @@
                 padding: 10px;
             }
         </style>
-
     </head>
     <body>
         <jsp:include page="/WEB-INF/Administrador/administrador_header.jsp" />
@@ -70,7 +70,7 @@
                     <%
                         for (UserDTO usuario : usuarios) {
                     %>
-                    <option value="<%=usuario.getUserID()%>"><%=usuario.getName() + " " + usuario.getSurname()%></option>
+                    <option value="<%=usuario.getUserID()%>"><%=usuario.getUsername()%></option>
                     <%
                         }
                     %>
@@ -104,6 +104,7 @@
 
             <%
                 List<ProductsDTO> productos = (List) request.getAttribute("productos");
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 if (productos == null || productos.isEmpty()) {
             %>
 
@@ -115,6 +116,8 @@
             <table border="1">
                 <tr>
                     <th>Titutlo</th>
+                    <th>Usuario</th>
+                    <th>Categoria</th>
                     <th>Descripcion</th>                
                     <th>Precio Inicial</th>                                
                     <th>Link foto</th>     
@@ -131,14 +134,16 @@
 
                 <tr>
                     <td><%= producto.getTitle()%></td>
+                    <td><%= producto.getUserID().getUsername()%></td>
+                    <td><%= producto.getCategoryID().getName()%></td>
                     <td><%= producto.getDescription()%></td>
                     <td><%= producto.getInitialPrice()%></td>
                     <td><%= producto.getPhoto()%></td>
-                    <td><%= producto.getStartDate()%></td>
-                    <td><%= producto.getFinishDate()%></td>
+                    <td><%= format.format(producto.getStartDate())%></td>
+                    <td><%= format.format(producto.getFinishDate())%></td>
                     <td><%= producto.getIsSold()%></td>
-                    <td><a href="ProductoBorrarServlet?id=<%= producto.getProductID()%>">Borrar</a></td>
-                    <td><a href="CrearEditarProducto?id=<%= producto.getProductID()%>">Editar</a></td>
+                    <td><a href="AdministradorBorrarProductoServlet?id=<%= producto.getProductID()%>">Borrar</a></td>
+                    <td><a href="AdministradorEditarProductoServlet?id=<%= producto.getProductID()%>">Editar</a></td>
                 </tr>
 
                 <%
