@@ -104,6 +104,7 @@ public class ProductService {
         }
 
         return this.listaEntityADTO(productos);
+    }
     
     // Miguel
     public void editarProducto(Integer id, String titulo, String descripcion, String categoria, BigDecimal pInicial, String linkFoto, Date fInicio, Date fFin, Boolean v){
