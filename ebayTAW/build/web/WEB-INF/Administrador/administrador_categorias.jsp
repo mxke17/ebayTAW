@@ -53,6 +53,11 @@
         <!-- TABLA PRODUCTOS -->
         <div class="content">
             <h1>Bienvenidx, <%=admin.getUsername()%> </h1>
+            
+            <form method="post" action="AdministradorSubirCategoriaServlet">
+                <input type="submit" value="Nueva Categoria">
+            </form>
+            
             <form method="post" action="AdministradorCategoriasServlet">
                 Nombre: <input type="text" name="filtroNombre" value="">
                 <input type="submit" value="Filtrar">
@@ -82,7 +87,7 @@
                 <tr>
                     <td><%= categoria.getName()%></td>
                     <td><a href="AdministradorBorrarCategoriaServlet?id=<%= categoria.getCategoryID()%>">Borrar</a></td>
-                    <td><a href="CrearEditarProducto?id=<%= categoria.getCategoryID()%>">Editar</a></td>
+                    <td><a href="AdministradorEditarCategoriaServlet?id=<%= categoria.getCategoryID()%>">Editar</a></td>
                 </tr>
 
                 <%

@@ -41,8 +41,29 @@ public class CategoryService {
     }
     
     //Cristobal
+    public CategoriesDTO getCategoria(Integer categoriaId){
+        Categories category = this.cf.find(categoriaId);
+        return category.toDTO();
+    }
+    
+    //Cristobal
     public void borrarCategoria(Integer categoriaId){
         Categories category = this.cf.find(categoriaId);
         this.cf.remove(category);
+    }
+    
+    //Cristobal
+    public void crearCategoria(String nombre){
+        Categories category = new Categories();
+        category.setName(nombre);
+        this.cf.create(category);
+    }
+    
+    //Cristobal
+    public void editarCategoria(Integer categoriaId, String nombre){
+        Categories category = this.cf.find(categoriaId);
+        System.out.println("sancho: " + nombre);
+        category.setName(nombre);
+        this.cf.edit(category);
     }
 }
