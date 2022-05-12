@@ -65,4 +65,10 @@ public class CategoryService {
         category.setName(nombre);
         this.cf.edit(category);
     }
+
+    // Miguel
+    public List<CategoriesDTO> findAll(){
+        List<Categories> categorias = this.cf.findAll();
+        return this.listaEntityADTO(categorias);
+    }
 }

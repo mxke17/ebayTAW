@@ -5,14 +5,9 @@
  */
 package Servlets;
 
-import DTO.ProductsDTO;
-import DTO.UserDTO;
-import Entity.Users;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Clock;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mjura
  */
-@WebServlet(name = "ProductosVendedorServlet", urlPatterns = {"/ProductosVendedorServlet"})
-public class ProductosVendedorServlet extends SampleTAWServlet {
+@WebServlet(name = "ProductoBorrarServlet", urlPatterns = {"/ProductoBorrarServlet"})
+public class VendedorProductoBorrarServlet extends SampleTAWServlet {
 
-    @EJB ProductService productService;
+    @EJB ProductService ps;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,15 +36,12 @@ public class ProductosVendedorServlet extends SampleTAWServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)){
-            String filtro = request.getParameter("filtroTitulo");
-            UserDTO vendedor = (UserDTO) request.getSession().getAttribute("usuario");
-            List<ProductsDTO> productos = this.productService.listarProductos(filtro, vendedor);
-            
-            request.setAttribute("productos", productos);
-            request.getRequestDispatcher("/WEB-INF/Vendedor/productos.jsp").forward(request, response);
+            String idProducto = request.getParameter("id");
+            this.ps.borrarProducto(Integer.parseInt(idProducto));
+            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

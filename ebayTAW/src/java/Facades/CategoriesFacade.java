@@ -36,4 +36,12 @@ public class CategoriesFacade extends AbstractFacade<Categories> {
         q.setParameter("nombre", '%' + nombre + '%');
         return q.getResultList();
     }
+    
+    public Categories findByNombre(String name) {
+        Query q;
+        q = this.getEntityManager().createQuery("SELECT c FROM Categories c WHERE c.name = :name");
+        q.setParameter("name", name);
+        
+        return (Categories)q.getSingleResult();
+    }
 }

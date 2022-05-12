@@ -5,13 +5,15 @@
  */
 package Servlets;
 
-import Entity.Products;
-import Facades.ProductsFacade;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,11 +25,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mjura
  */
-@WebServlet(name = "ProductoGuardarServlet", urlPatterns = {"/ProductoGuardarServlet"})
-public class ProductoGuardarServlet extends SampleTAWServlet {
+@WebServlet(name = "ProductoCrearVendedorServlet", urlPatterns = {"/ProductoCrearVendedorServlet"})
+public class VendedorProductoCrearServlet extends SampleTAWServlet {
 
     @EJB ProductService ps;
-    private ProductsFacade pf;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,24 +41,38 @@ public class ProductoGuardarServlet extends SampleTAWServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
         if (super.comprobarSession(request, response)){
             String id = request.getParameter("id");
             String titulo = request.getParameter("titulo");
             String descripcion = request.getParameter("descripcion");
-            String precioInicial = request.getParameter("precioInicial");
-            BigDecimal pInicial = new BigDecimal(precioInicial);
-            String linkFoto = request.getParameter("linkFoto");
-            //String fechaInicio = request.getParameter("fechaInicio");
-            //Date fInicio = new Date(fechaInicio);
-            //String fechaFin = request.getParameter("fechaFin");
-            //Date fFin = new Date(fechaFin);
-            String vendido = request.getParameter("vendido");
+            String categoria = request.getParameter("categoria");
+            String $precio = request.getParameter("precioInicial");
+            BigDecimal precio = new BigDecimal ($precio);
+            String link = request.getParameter("linkFoto");
+            String fechaInicio = request.getParameter("fechaInicio");
+            String fechaFin = request.getParameter("fechaFin");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date fInicio = null;
+            Date fFin = null;
+
+            try {
+                fInicio = format.parse(fechaInicio);
+            } catch (ParseException ex) {
+                Logger.getLogger(VendedorProductoCrearServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                fFin = format.parse(fechaFin);
+            } catch (ParseException ex) {
+                Logger.getLogger(VendedorProductoCrearServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
-            //this.ps.editarProducto(Integer.parseInt(id), titulo, descripcion, pInicial, linkFoto, fInicio, fFin, Boolean.valueOf(vendido));
-            this.ps.editarProductoBorrarLuego(Integer.parseInt(id), titulo, descripcion, pInicial, linkFoto, Boolean.valueOf(vendido));
+            this.ps.crearProducto(id, titulo, descripcion, categoria, precio, link, fInicio, fFin);
+            
             response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-        }
-        
+        } 
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
