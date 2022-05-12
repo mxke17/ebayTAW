@@ -147,4 +147,10 @@ public class ProductService {
         usuario.setProductsList(productosUsuario);
         this.uf.edit(usuario);
     }
+    
+    //Miguel
+    public void setVendido (Integer productoId){
+        Products producto = this.pf.find(productoId);
+        producto.setIsSold(Boolean.TRUE);
+    }
 }
