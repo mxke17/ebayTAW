@@ -4,11 +4,9 @@
     Author     : mjura
 --%>
 
-<%@page import="DTO.CategoriesDTO"%>
-<%@page import="java.util.List"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DTO.UserDTO"%>
 <%@page import="DTO.UserDTO"%>
+<%@page import="DTO.ProductsDTO"%>
 <%@page import="DTO.ProductsDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -25,11 +23,9 @@
     </head>
     <body>
         <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
-        
+        <!-- NUEVO PRODUCTO -->
         <%
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             ProductsDTO producto = (ProductsDTO)request.getAttribute("producto");
-            List<CategoriesDTO> categorias = (List)request.getAttribute("categorias");
         %>
         
         <form method="post" action="ProductoGuardarServlet">
@@ -44,21 +40,8 @@
                         <td><input type="text" name="descripcion" value="<%= producto.getDescription() %>"></td>
                     </tr>
                     <tr>
-                        <td><label for="">Categoria:</label></td>
-                        <td><select name="categoria">
-                                <% for (CategoriesDTO categoria:categorias){
-                                    String selected = "";
-                                if (categoria.getName().equals(producto.getCategoryID().getName())){
-                                    selected = "selected";
-                                }
-                                %>
-                                <option <%= selected %> ><%= categoria.getName() %></option>
-                                <%}%>
-                            </select></td>
-                    </tr>
-                    <tr>
                         <td><label for="">Precio Inicial:</label></td>
-                        <td><input type="number" name="precioInicial" value="<%= producto.getInitialPrice() %>"></td>
+                        <td><input type="text" name="precioInicial" value="<%= producto.getInitialPrice() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Link foto:</label></td>
@@ -66,33 +49,38 @@
                     </tr>
                     <tr>
                         <td><label for="">Fecha inicio:</label></td>
-                        <td><input type="text" name="fechaInicio" value="<%= format.format(producto.getStartDate())%>"></td>
+                        <td><input type="text" name="fechaInicio" value="<%= producto.getStartDate() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Fecha fin</label></td>
-                        <td><input type="text" name="fechaFin" value="<%= format.format(producto.getFinishDate()) %>"></td>
+                        <td><input type="text" name="fechaFin" value="<%= producto.getFinishDate() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">¿Vendido?</label></td>
                         <%
                             Boolean valor = producto.getIsSold();
-                            if (valor){ // Esta vendido
+                            if (valor){ // True
                         %>
-                        <td><input type="radio" name="vendido" value="True" checked/>Vendido<br>
-                        <input type="radio" name="vendido" value="False" />En venta</td>
+                        <td><input type="radio" name="vendido" value="True" checked/>Vendido</td><br>
+                        <td><input type="radio" name="enVenta" value="False" />En venta</td>
                         <%
-                            } else { // No estaba vendido
+                            } else {
                         %>
-                        <td><input type="radio" name="vendido" value="True"/>Vendido<br>
-                        <input type="radio" name="vendido" value="False" checked/>En venta<br></td>
+                        <td><input type="radio" name="vendido" value="True"/>Vendido</td><br>
+                        <td><input type="radio" name="enVenta" value="False" checked/>En venta<br></td>
                         <%
                           }
                         %>
+                        
+                        
+                        
+                        <!--<td><input type="text" name="vendido" value="<%= producto.getIsSold() %>"></td>
+                        <td><input type="radio" name="vendido" value="True" />Vendido<br></td>
+                        <td><input type="radio" name="enVenta" value="False" />En venta<br></td>-->
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="id" value="<%= producto.getProductID() %>" />       
-            <input type="submit" value="Editar" />
+                    <input type="submit" value="Editar" />
         </form>
     </body>
 </html>

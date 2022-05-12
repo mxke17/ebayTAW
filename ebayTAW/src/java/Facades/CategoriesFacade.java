@@ -9,7 +9,6 @@ import Entity.Categories;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
@@ -28,14 +27,6 @@ public class CategoriesFacade extends AbstractFacade<Categories> {
 
     public CategoriesFacade() {
         super(Categories.class);
-    }
-    
-    public Categories findByNombre(String name) {
-        Query q;
-        q = this.getEntityManager().createQuery("SELECT c FROM Categories c WHERE c.name = :name");
-        q.setParameter("name", name);
-        
-        return (Categories)q.getSingleResult();
     }
     
 }

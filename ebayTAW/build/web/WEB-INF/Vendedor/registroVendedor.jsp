@@ -122,9 +122,11 @@
                             <td>Region:</td>
                             <td><input type="text" name="region" value="" /></td>
                         </tr>
+                        <tr>
+                            <td><input type="submit" value="Registrarse" /></td>
+                        </tr>
                     </tbody>
                 </table>
-                <input type="submit" value="Registrarse" /></input>
             </form>
         </div>
         
