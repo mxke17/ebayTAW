@@ -5,9 +5,11 @@
  */
 package Servlets;
 
-import Service.ProductService;
+import DTO.CategoriesDTO;
+import Service.CategoryService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +21,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mjura
  */
-@WebServlet(name = "ProductoBorrarServlet", urlPatterns = {"/ProductoBorrarServlet"})
-public class ProductoBorrarVendedorServlet extends SampleTAWServlet {
+@WebServlet(name = "ToCrearProducto", urlPatterns = {"/ToCrearProducto"})
+public class VendedorToCrearProductoServlet extends HttpServlet {
 
-    @EJB ProductService ps;
+    @EJB CategoryService cs;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,11 +37,12 @@ public class ProductoBorrarVendedorServlet extends SampleTAWServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (super.comprobarSession(request, response)){
-            String idProducto = request.getParameter("id");
-            this.ps.borrarProducto(Integer.parseInt(idProducto));
-            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-        }
+        response.setContentType("text/html;charset=UTF-8");
+        List<CategoriesDTO> categorias = this.cs.findAll();
+        
+        
+        request.setAttribute("categorias", categorias);
+        request.getRequestDispatcher("/WEB-INF/Vendedor/createProducto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

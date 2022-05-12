@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author mjura
  */
 @WebServlet(name = "CrearEditarProducto", urlPatterns = {"/CrearEditarProducto"})
-public class ToEditarProducto extends SampleTAWServlet {
+public class VendedorToEditarProductoServlet extends SampleTAWServlet {
 
     @EJB CategoryService cs;
 
