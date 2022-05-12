@@ -26,7 +26,7 @@
         <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
         
         <%
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             ProductsDTO producto = (ProductsDTO)request.getAttribute("producto");
             List<CategoriesDTO> categorias = (List)request.getAttribute("categorias");
         %>
@@ -36,11 +36,11 @@
                 <tbody>
                     <tr>
                         <td><label for="">Titulo:</label></td>
-                        <td><input type="text" name="titulo" value="<%= producto.getTitle() %>"></td>
+                        <td><input required type="text" name="titulo" value="<%= producto.getTitle() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Descripcion:</label></td>
-                        <td><input type="text" name="descripcion" value="<%= producto.getDescription() %>"></td>
+                        <td><input required type="text" name="descripcion" value="<%= producto.getDescription() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Categoria:</label></td>
@@ -57,19 +57,19 @@
                     </tr>
                     <tr>
                         <td><label for="">Precio Inicial:</label></td>
-                        <td><input type="number" name="precioInicial" value="<%= producto.getInitialPrice() %>"></td>
+                        <td><input required type="number" name="precioInicial" value="<%= producto.getInitialPrice() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Link foto:</label></td>
-                        <td><input type="text" name="linkFoto" value="<%= producto.getPhoto() %>"></td>
+                        <td><input required type="text" name="linkFoto" value="<%= producto.getPhoto() %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Fecha inicio:</label></td>
-                        <td><input type="text" name="fechaInicio" value="<%= format.format(producto.getStartDate())%>"></td>
+                        <td><input required type="date" name="fechaInicio" value="<%= format.format(producto.getStartDate())%>"></td>
                     </tr>
                     <tr>
                         <td><label for="">Fecha fin</label></td>
-                        <td><input type="text" name="fechaFin" value="<%= format.format(producto.getFinishDate()) %>"></td>
+                        <td><input required type="date" name="fechaFin" value="<%= format.format(producto.getFinishDate()) %>"></td>
                     </tr>
                     <tr>
                         <td><label for="">¿Vendido?</label></td>

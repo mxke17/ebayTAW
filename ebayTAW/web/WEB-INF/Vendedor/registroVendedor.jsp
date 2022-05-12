@@ -76,23 +76,23 @@
                     <tbody>
                         <tr>
                             <td>*Nombre de usuario:</td>
-                            <td><input type="text" name="nick" value="" /></td>
+                            <td><input required type="text" name="nick" value="" /></td>
                         </tr>
                         <tr>
                             <td>*Email:</td>
-                            <td><input type="email" name="email" value="" /></td>
+                            <td><input required type="email" name="email" value="" /></td>
                         </tr>
                         <tr>
                             <td>*Contraseña:</td>
-                            <td><input type="password" name="pass" value="" /></td>
+                            <td><input required type="password" name="pass" value="" /></td>
                         </tr>
                         <tr>
                             <td>Nombre:</td>
-                            <td><input type="text" name="nombre" value="" /></td>
+                            <td><input required type="text" name="nombre" value="" /></td>
                         </tr>
                         <tr>
                             <td>Apellidos:</td>
-                            <td><input type="text" name="apellidos" value="" /></td>
+                            <td><input required type="text" name="apellidos" value="" /></td>
                         </tr>
                         <tr>
                             <td>Genero:</td>

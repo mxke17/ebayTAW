@@ -4,6 +4,7 @@
     Author     : mjura
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DTO.ProductsDTO"%>
 <%@page import="DTO.UserDTO"%>
@@ -78,7 +79,7 @@
         %>
         <table border="1">
             <tr>
-                <th>Titutlo</th>
+                <th>Tituto</th>
                 <th>Descripcion</th>
                 <th>Categoria</th>                
                 <th>Precio Inicial</th>                                
@@ -87,7 +88,8 @@
                 <th>Fecha final</th>
                 <th>Vendido</th>
                 <th></th>                                                     
-                <th></th>                                                                     
+                <th></th>       
+                <th></th>
             </tr>
         
         <% 
@@ -105,6 +107,10 @@
             <td><%= producto.getIsSold() %></td>
             <td><a href="ProductoBorrarServlet?id=<%= producto.getProductID() %>">Borrar</a></td>
             <td><a href="CrearEditarProducto?id=<%= producto.getProductID() %>">Editar</a></td>
+            <td><% Date date = new Date();
+                if (date.after(producto.getFinishDate())){ %>
+                    <a href="VendedorToAdjudicarServlet?id=<%= producto.getProductID() %>">Adjudicar</a></td>
+                <%}%></td>
         </tr>
         
         <% 
