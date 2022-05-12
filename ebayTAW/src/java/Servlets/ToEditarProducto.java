@@ -6,19 +6,13 @@
 package Servlets;
 
 import DTO.CategoriesDTO;
+import DTO.ProductsDTO;
 import Entity.Categories;
-import Entity.Products;
-import Facades.ProductsFacade;
 import Service.CategoryService;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,12 +24,13 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mjura
  */
-@WebServlet(name = "ProductoGuardarServlet", urlPatterns = {"/ProductoGuardarServlet"})
-public class ProductoGuardarServlet extends SampleTAWServlet {
+@WebServlet(name = "CrearEditarProducto", urlPatterns = {"/CrearEditarProducto"})
+public class ToEditarProducto extends SampleTAWServlet {
+
+    @EJB CategoryService cs;
 
     @EJB ProductService ps;
-    @EJB CategoryService cs;
-    //private ProductsFacade pf;
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,39 +43,21 @@ public class ProductoGuardarServlet extends SampleTAWServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (super.comprobarSession(request, response)){
-            String id = request.getParameter("id");
-            String titulo = request.getParameter("titulo");
-            String descripcion = request.getParameter("descripcion");
-            String categoria = request.getParameter("categoria");
-            String precioInicial = request.getParameter("precioInicial");
-            BigDecimal pInicial = new BigDecimal(precioInicial);
-            String linkFoto = request.getParameter("linkFoto");
-            String fechaInicio = request.getParameter("fechaInicio");
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-            Date fInicio = null;
+        if(super.comprobarSession(request, response)){
+            String idProducto = request.getParameter("id"); //EDITAR
+            List<CategoriesDTO> categorias = null;
+            categorias = this.cs.findAll();
             
-            try {
-                fInicio = format.parse(fechaInicio);
-            } catch (ParseException ex) {
-                Logger.getLogger(ProductoGuardarServlet.class.getName()).log(Level.SEVERE, null, ex);
+            if (idProducto != null && !request.getParameter("id").isEmpty()){ 
+                ProductsDTO producto = this.ps.buscarProducto(Integer.parseInt(idProducto));
+                request.setAttribute("producto", producto);
+                request.setAttribute("categorias", categorias);
+            } else { // CREAR
+                
             }
-            
-            String fechaFin = request.getParameter("fechaFin");
-            Date fFin = null;
-            try {
-                fFin = format.parse(fechaFin);
-            } catch (ParseException ex) {
-                Logger.getLogger(ProductoGuardarServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String vendido = request.getParameter("vendido");
-            Boolean v = Boolean.parseBoolean(vendido);
-            
-            this.ps.editarProducto(Integer.parseInt(id), titulo, descripcion, categoria, pInicial, linkFoto, fInicio, fFin, v);
-            
-            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
         }
         
+        request.getRequestDispatcher("/WEB-INF/Vendedor/editProducto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

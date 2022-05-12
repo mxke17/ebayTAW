@@ -5,7 +5,6 @@
  */
 package Servlets;
 
-import DTO.ProductsDTO;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mjura
  */
-@WebServlet(name = "CrearEditarProducto", urlPatterns = {"/CrearEditarProducto"})
-public class CrearEditarProducto extends SampleTAWServlet {
+@WebServlet(name = "ProductoBorrarServlet", urlPatterns = {"/ProductoBorrarServlet"})
+public class ProductoBorrarVendedorServlet extends SampleTAWServlet {
 
     @EJB ProductService ps;
     
@@ -36,14 +35,11 @@ public class CrearEditarProducto extends SampleTAWServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(super.comprobarSession(request, response)){
+        if (super.comprobarSession(request, response)){
             String idProducto = request.getParameter("id");
-            if (idProducto != null && !request.getParameter("id").isEmpty()){ //EDITAR
-                ProductsDTO producto = this.ps.buscarProducto(Integer.parseInt(idProducto));
-                request.setAttribute("producto", producto);
-            }
+            this.ps.borrarProducto(Integer.parseInt(idProducto));
+            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
         }
-        request.getRequestDispatcher("/WEB-INF/Vendedor/editProducto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
