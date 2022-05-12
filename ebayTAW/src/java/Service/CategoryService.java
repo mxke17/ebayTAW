@@ -52,7 +52,6 @@ public class CategoryService {
         this.cf.remove(category);
     }
     
-<<<<<<< Updated upstream
     //Cristobal
     public void crearCategoria(String nombre){
         Categories category = new Categories();
@@ -66,11 +65,11 @@ public class CategoryService {
         System.out.println("sancho: " + nombre);
         category.setName(nombre);
         this.cf.edit(category);
-=======
+    }
+
     // Miguel
     public List<CategoriesDTO> findAll(){
         List<Categories> categorias = this.cf.findAll();
         return this.listaEntityADTO(categorias);
->>>>>>> Stashed changes
     }
 }
