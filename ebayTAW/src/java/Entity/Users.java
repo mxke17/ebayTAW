@@ -303,7 +303,6 @@ public class Users implements Serializable {
         dto.setPostalCode(postalCode);
         
         return dto;
-       
     }
     
 }
