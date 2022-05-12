@@ -62,7 +62,6 @@ public class CategoryService {
     //Cristobal
     public void editarCategoria(Integer categoriaId, String nombre){
         Categories category = this.cf.find(categoriaId);
-        System.out.println("sancho: " + nombre);
         category.setName(nombre);
         this.cf.edit(category);
     }
