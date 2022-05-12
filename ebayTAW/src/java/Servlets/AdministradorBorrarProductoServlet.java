@@ -20,9 +20,11 @@ import javax.servlet.http.HttpServletResponse;
  * @author cristobal
  */
 @WebServlet(name = "AdministradorBorrarProductoServlet", urlPatterns = {"/AdministradorBorrarProductoServlet"})
-public class AdministradorBorrarProductoServlet extends HttpServlet {
+public class AdministradorBorrarProductoServlet extends SampleTAWServlet {
 
-    @EJB ProductService productService;
+    @EJB
+    ProductService productService;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,9 +36,11 @@ public class AdministradorBorrarProductoServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Integer productId = Integer.parseInt(request.getParameter("id"));
-        this.productService.borrarProducto(productId);
-        response.sendRedirect(request.getContextPath() + "/AdministradorProductosServlet");
+        if (super.comprobarSession(request, response)) {
+            Integer productId = Integer.parseInt(request.getParameter("id"));
+            this.productService.borrarProducto(productId);
+            response.sendRedirect(request.getContextPath() + "/AdministradorProductosServlet");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

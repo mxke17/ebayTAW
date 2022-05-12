@@ -4,6 +4,7 @@
     Author     : cristobal
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DTO.ProductsDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="DTO.CategoriesDTO"%>
@@ -49,36 +50,44 @@
         </style>
     </head>
     <body>
-        <h1>Editar producto</h1>
+        <jsp:include page="/WEB-INF/Administrador/administrador_header.jsp" />
 
-        <%
-            ProductsDTO producto = (ProductsDTO) request.getAttribute("producto");
-            List<CategoriesDTO> categorias = (List) request.getAttribute("categorias");
-        %>
+        <div class="content">
+            <h1>Editar producto</h1>
 
-        <form method="post" action="AdministradorGuardarEditarProducto">
-            Titulo: <input type="text" name="title" value="<%=producto.getTitle()%>"><br>
-            
-            Descripcion: <input type="text" name="description" value="<%=producto.getDescription()%>"><br>
+            <%
+                ProductsDTO producto = (ProductsDTO) request.getAttribute("producto");
+                List<CategoriesDTO> categorias = (List) request.getAttribute("categorias");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            %>
 
-            Categoria: <select name="categoryId">
-                <%
-                    for (CategoriesDTO categoria : categorias) {
-                %>
-                <option value="<%=categoria.getCategoryID()%>"><%=categoria.getName()%></option>
-                <%
-                    }
-                %>
-            </select><br>
+            <form method="post" action="AdministradorGuardarEditarProductoServlet">
+                Titulo: <input type="text" name="title" value="<%=producto.getTitle()%>" required><br>
+                Descripcion: <input type="text" name="description" value="<%=producto.getDescription()%>" required><br>
+                Foto: <input type="text" name="photo" value="<%=producto.getPhoto()%>" required><br>
 
-            Precio inicial: <input type="number" name="initialPrice" step="any" min="0" value="<%=producto.getInitialPrice()%>"><br>
+                Categoria: <select name="categoryId">
+                    <%
+                        for (CategoriesDTO categoria : categorias) {
+                    %>
+                    <option value="<%=categoria.getCategoryID()%>" <%=producto.getCategoryID().getCategoryID() == categoria.getCategoryID() ? "selected" : ""%>><%=categoria.getName()%></option>
+                    <%
+                        }
+                    %>
+                </select><br>
 
-            Fecha de inicio: <input type="date" name="startDate" value="<%=producto.getStartDate()%>"><br>
+                Precio inicial: <input type="number" name="initialPrice" step="any" min="0" value="<%=producto.getInitialPrice()%>" required><br>
 
-            Fecha de fin: <input type="date" name="finishDate" value="<%=producto.getFinishDate()%>"><br>
+                Fecha de inicio: <input type="date" name="startDate" value="<%=format.format(producto.getStartDate())%>" required><br>
 
-            Vendido: <input type="radio" name="isSold"><br>
-            <input type="submit" value="Filtrar">
-        </form>
+                Fecha de fin: <input type="date" name="finishDate" value="<%=format.format(producto.getFinishDate())%>" required><br>
+
+                Vendido: <input type="checkbox" name="isSold" <%=producto.getIsSold() ? "checked" : ""%>><br>
+
+                <input type="hidden" name="productId" value="<%=producto.getProductID()%>"><br>
+                
+                <input type="submit" value="Editar">
+            </form>
+        </div>
     </body>
 </html>

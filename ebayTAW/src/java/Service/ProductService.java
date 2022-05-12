@@ -125,6 +125,25 @@ public class ProductService {
         this.pf.edit(producto);
     }
     
+    //Cristobal
+    public void editarProducto(Integer productId, String titulo, String descripcion, String linkFoto, Integer categoriaId, BigDecimal pInicial, Date fInicio, Date fFin, Boolean v){
+        
+        //Busco el producto
+        Products producto = this.pf.find(productId);
+        Categories cat = this.cf.find(categoriaId);
+        
+        producto.setTitle(titulo);
+        producto.setDescription(descripcion);
+        producto.setCategoryID(cat);
+        producto.setInitialPrice(pInicial);
+        producto.setPhoto(linkFoto);
+        producto.setStartDate(fInicio);
+        producto.setFinishDate(fFin);
+        producto.setIsSold(v);
+        
+        this.pf.edit(producto);
+    }
+    
     //Miguel
     public void crearProducto(String id, String titulo, String descripcion, String categoria, BigDecimal precio, String foto, Date finicio, Date ffin){
         Products producto = new Products();

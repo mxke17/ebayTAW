@@ -5,17 +5,13 @@
  */
 package Servlets;
 
-import Service.ProductService;
+import Service.UserService;
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author cristobal
  */
-@WebServlet(name = "AdministradorGuardarEditarProductoServlet", urlPatterns = {"/AdministradorGuardarEditarProductoServlet"})
-public class AdministradorGuardarEditarProductoServlet extends SampleTAWServlet {
+@WebServlet(name = "AdministradorBorrarUsuarioServlet", urlPatterns = {"/AdministradorBorrarUsuarioServlet"})
+public class AdministradorBorrarUsuarioServlet extends SampleTAWServlet {
 
-    @EJB ProductService productService;
+    @EJB UserService userervice;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,28 +35,13 @@ public class AdministradorGuardarEditarProductoServlet extends SampleTAWServlet 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)) {
-            try {
-                Integer productoId = Integer.parseInt(request.getParameter("productId"));
-                String title = request.getParameter("title");
-                String description = request.getParameter("description");
-                String photo = request.getParameter("photo");
-                Integer categoryId = Integer.parseInt(request.getParameter("categoryId"));
-                BigDecimal initialPrice = new BigDecimal(request.getParameter("initialPrice"));
-                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-                Date startDate = format.parse(request.getParameter("startDate"));
-                Date finishDate = format.parse(request.getParameter("finishDate"));
-                String isSoldStr = request.getParameter("isSold");
-                Boolean isSold = isSoldStr != null && !isSoldStr.isEmpty();
-                this.productService.editarProducto(productoId, title, description, photo, categoryId, initialPrice, startDate, finishDate, isSold);
-                
-                response.sendRedirect(request.getContextPath() + "/AdministradorProductosServlet");
-            } catch (ParseException ex) {
-                Logger.getLogger(AdministradorGuardarEditarProductoServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Integer userId = Integer.parseInt(request.getParameter("id"));
+            this.userervice.borrarUsuario(userId);
+            response.sendRedirect(request.getContextPath() + "/AdministradorUsuariosServlet");
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

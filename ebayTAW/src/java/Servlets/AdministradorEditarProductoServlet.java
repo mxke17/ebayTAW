@@ -45,11 +45,11 @@ public class AdministradorEditarProductoServlet extends SampleTAWServlet {
         if (super.comprobarSession(request, response)) {
             Integer id = Integer.parseInt(request.getParameter("id"));
             ProductsDTO product = this.productService.buscarProducto(id);
-            request.setAttribute("product", product);
+            request.setAttribute("producto", product);
             
             List<CategoriesDTO> categorias = this.categoryService.listarCategorias(null);
             request.setAttribute("categorias", categorias);
-
+            
             request.getRequestDispatcher("/WEB-INF/Administrador/administrador_editar_producto.jsp").forward(request, response);
         }
     }
