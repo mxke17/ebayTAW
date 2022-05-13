@@ -4,6 +4,8 @@
     Author     : mjura
 --%>
 
+<!-- MIGUEL JURADO VAZQUEZ -->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -62,7 +64,7 @@
     <body>
         
         <div class="topnav">
-            <li style="float:right"><a class="active" href="homeRegisterServlet">Home</a></li>
+            <li style="float:right"><a class="active" href="VendedorToHome">Home</a></li>
             <li style="float:right"><a class="active" href="homeRegisterServlet">Registrate como vendedor</a></li>
         </div>
         
@@ -132,7 +134,7 @@
         
         
         <div class="footer">
-            <p>Regístrese para formar parte de la comunidad Ebay</p>
+            <p>© 2022 EbayTAW, Inc</p>
         </div>
     </body>
 </html>

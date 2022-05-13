@@ -124,6 +124,7 @@ public class Categories implements Serializable {
         return "Entity.Categories[ categoryID=" + categoryID + " ]";
     }
     
+    // CRISTOBAL
     public CategoriesDTO toDTO(){
         CategoriesDTO dto = new CategoriesDTO();
         

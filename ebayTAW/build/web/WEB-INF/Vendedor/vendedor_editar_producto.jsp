@@ -4,6 +4,8 @@
     Author     : mjura
 --%>
 
+<!-- MIGUEL JURADO VAZQUEZ -->
+
 <%@page import="DTO.CategoriesDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -21,18 +23,43 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=vendedor.getUsername()%> page</title>
+        <style>
+            * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            /* Style the content */
+            .content {
+                background-color: #ddd;
+                padding: 10px;
+            }
+            
+            /* Style the footer */
+            .footer {
+                background-color: #f1f1f1;
+                padding: 10px;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="/WEB-INF/Vendedor/vendedor_header.jsp" />
         
-        <%
+        <div class="content">
+            <%
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             ProductsDTO producto = (ProductsDTO)request.getAttribute("producto");
             List<CategoriesDTO> categorias = (List)request.getAttribute("categorias");
         %>
         
         <form method="post" action="ProductoGuardarServlet">
-            <table border="1">
+            <h5>Receurda, todos los campos son obligatorios</h5>
+            <table>
                 <tbody>
                     <tr>
                         <td><label for="">Titulo:</label></td>
@@ -84,5 +111,12 @@
             <input type="hidden" name="id" value="<%= producto.getProductID() %>" />       
             <input type="submit" value="Editar" />
         </form>
+        </div>
+        
+        
+            
+        <div class="footer">
+            <p>© 2022 EbayTAW, Inc</p>
+        </div>
     </body>
 </html>

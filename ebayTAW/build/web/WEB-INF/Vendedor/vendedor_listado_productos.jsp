@@ -4,6 +4,8 @@
     Author     : mjura
 --%>
 
+<!-- MIGUEL JURADO VAZQUEZ -->
+
 <%@page import="DTO.CategoriesDTO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -66,8 +68,9 @@
             <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
             
             <!-- FILTROS -->
+        <h5>Filtra tus productos:</h5>
         <form method="post" action="ProductosVendedorServlet">
-            <table border="1">
+            <table>
                 <tbody>
                     <tr>
                         <td>Titulo:</td>
@@ -126,7 +129,8 @@
         
         <br>
         
-        <table border="1">
+        <h4>Sus productos:</h4>
+        <table border="2">
             <tr>
                 <th>Tituto</th>
                 <th>Descripcion</th>
@@ -171,6 +175,9 @@
         <% 
             }
         %>
+        </div>
+        <div class="footer">
+            <p>© 2022 EbayTAW, Inc</p>
         </div>
     </body>
 </html>

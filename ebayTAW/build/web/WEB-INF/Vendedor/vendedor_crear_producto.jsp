@@ -4,6 +4,8 @@
     Author     : mjura
 --%>
 
+<!-- MIGUEL JURADO VAZQUEZ -->
+
 <%@page import="DTO.UserDTO"%>
 <%@page import="DTO.CategoriesDTO"%>
 <%@page import="java.util.List"%>
@@ -21,12 +23,40 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Crear Producto</title>
+        
+        <style>
+            * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            /* Style the content */
+            .content {
+                background-color: #ddd;
+                padding: 10px;
+            }
+            
+            /* Style the footer */
+            .footer {
+                background-color: #f1f1f1;
+                padding: 10px;
+            }
+        </style>
+        
     </head>
     <body>
         <jsp:include page="/WEB-INF/Vendedor/vendedor_header.jsp" />
-        <form method="post" action="ProductoCrearVendedorServlet">
-            <table border="1">
+        
+        <div class="content">
+            <form method="post" action="ProductoCrearVendedorServlet">
+            <h5>Receurda, todos los campos son obligatorios</h5>
+            <table>
                 <tbody>
                     <tr>
                         <td><label for="">Titulo:</label></td>
@@ -46,7 +76,7 @@
                     </tr>
                     <tr>
                         <td><label for="">Precio Inicial:</label></td>
-                        <td><input required type="number" name="precioInicial" value=""></td>
+                        <td><input required type="number" step="any" min="0" name="precioInicial" value=""></td>
                     </tr>
                     <tr>
                         <td><label for="">Link foto:</label></td>
@@ -64,6 +94,12 @@
             </table>
             <input type="hidden" name="id" value="<%= vendedor.getUserID() %>" />
             <input type="submit" value="Crear" />
-        </form>
+            </form>
+        </div>
+        
+        <div class="footer">
+            <p>© 2022 EbayTAW, Inc</p>
+        </div>
+        
     </body>
 </html>

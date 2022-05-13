@@ -286,6 +286,7 @@ public class Users implements Serializable {
         return "Entity.Users[ userID=" + userID + " ]";
     }
     
+    // MIGUEL
     public UserDTO toDTO(){
         UserDTO dto = new UserDTO();
         dto.setUserID(userID);

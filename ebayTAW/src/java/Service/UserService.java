@@ -39,7 +39,6 @@ public class UserService {
     }
 
     // Miguel
-    
     public void crearVendedor(String username, String email, String password,
             String nombre, String apellidos, String genero, String calle,
             String numero, String ciudad, String cpostal, String region) {

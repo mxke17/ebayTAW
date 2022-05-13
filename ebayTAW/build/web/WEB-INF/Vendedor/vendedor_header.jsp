@@ -4,6 +4,8 @@
     Author     : mjura
 --%>
 
+<!-- MIGUEL JURADO VAZQUEZ -->
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DTO.UserDTO"%>
 

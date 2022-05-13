@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+// MIGUEL JURADO VAZQUEZ Y CRISTOBAL MARTÍN ARENAS
+
 package Servlets;
 
 import DTO.UserDTO;

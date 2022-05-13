@@ -3,9 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-// MIGUEL JURADO VAZQUEZ
-
 package Servlets;
 
 import java.io.IOException;
@@ -16,13 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
- * @author miguel
+ * @author mjura
  */
-@WebServlet(name = "homeRegisterServlet", urlPatterns = {"/homeRegisterServlet"})
-public class VendedorToRegistrarVendedor extends HttpServlet {
+@WebServlet(name = "VendedorToHome", urlPatterns = {"/VendedorToHome"})
+public class VendedorToHome extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +31,8 @@ public class VendedorToRegistrarVendedor extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("WEB-INF/Vendedor/vendedor_registro.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

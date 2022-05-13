@@ -4,6 +4,8 @@
     Author     : mjura
 --%>
 
+<!-- MIGUEL JURADO VAZQUEZ -->
+
 <%@page import="Entity.Users"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="DTO.UserDTO"%>
@@ -25,12 +27,38 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Ajudicar compra</title>
+        
+        <style>
+            * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            }
+
+            body {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            /* Style the content */
+            .content {
+                background-color: #ddd;
+                padding: 10px;
+            }
+            
+            /* Style the footer */
+            .footer {
+                background-color: #f1f1f1;
+                padding: 10px;
+            }
+        </style>
+        
     </head>
     <body>
         <jsp:include page="/WEB-INF/Vendedor/vendedor_header.jsp" />
-        <h1>Listado de pujas del producto</h1>
-        <table border="1">
+        <div class="content">
+            <h1>Listado de pujas del producto</h1>
+        <table border="2">
             <thead>
                 <tr>
                     <th>Titulo</th>
@@ -56,10 +84,11 @@
         <% if(producto.getBidsList()== null || producto.getBidsList().isEmpty()){ %>
         <p>Lo siento, su producto no ha sido pujado</p>
         <%} else { %>
-        <table border="1">
+        <table>
             <thead>
                 <tr>
                     <th>Comprador</th>
+                    <th></th>
                     <th>Puja</th>
                 </tr>
             </thead>
@@ -73,6 +102,7 @@
                 } %>
                 <tr>
                     <td><%= puja.getUserID().getUsername() %></td>
+                    <td></td>
                     <td><%= puja.getPrice() %> € </td>
                 </tr>
                 <%}%>
@@ -85,5 +115,12 @@
             <input type="submit" value="Confirmar" />
         </form>
         <%}%>
+        </div>
+        
+        
+        <div class="footer">
+            <p>© 2022 EbayTAW, Inc</p>
+        </div>
+        
     </body>
 </html>
