@@ -5,14 +5,22 @@
  */
 package Servlets;
 
+import DTO.CategoriesDTO;
 import DTO.ProductsDTO;
 import DTO.UserDTO;
 import Entity.Users;
+import Service.CategoryService;
 import Service.ProductService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 public class VendedorProductosServlet extends SampleTAWServlet {
 
     @EJB ProductService productService;
+    @EJB CategoryService cs;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +50,51 @@ public class VendedorProductosServlet extends SampleTAWServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)){
-            String filtro = request.getParameter("filtroTitulo");
             UserDTO vendedor = (UserDTO) request.getSession().getAttribute("usuario");
-            List<ProductsDTO> productos = this.productService.listarProductos(filtro, vendedor);
+            List<CategoriesDTO> categorias = this.cs.findAll();
             
+            // <<< FILTROS
+            String titulo = request.getParameter("titulo");
+            String $idCategoria = request.getParameter("idCategoria");
+            Integer idCategoria = null;
+            if ($idCategoria != null || !$idCategoria.isEmpty()){
+                idCategoria = Integer.parseInt($idCategoria);
+            }
+            
+            String $precioInicial = request.getParameter("precioInicial");
+            BigDecimal precioInicial = null;
+            if ($precioInicial != null || !$precioInicial.isEmpty()){
+                precioInicial = new BigDecimal($precioInicial);
+            }
+            
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String $fechaInicio = request.getParameter("fechaInicio");
+            Date fechaInicio = null;
+            try {
+                fechaInicio = format.parse($fechaInicio);
+            } catch (ParseException ex) {
+                Logger.getLogger(VendedorProductosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String $fechaFin = request.getParameter("fechaFin");
+            Date fechaFin = null;
+            try {
+                fechaFin = format.parse($fechaFin);
+            } catch (ParseException ex) {
+                Logger.getLogger(VendedorProductosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            String $vendido = request.getParameter("vendido");
+            Boolean vendido = null;
+            if ($vendido != null || !$vendido.isEmpty()){
+                vendido = Boolean.parseBoolean($vendido);
+            }
+            
+            List<ProductsDTO> productos = this.productService.listarProductos(titulo, vendedor);
+            // FILTROS >>>
+            
+            
+            request.setAttribute("categorias", categorias);
             request.setAttribute("productos", productos);
             request.getRequestDispatcher("/WEB-INF/Vendedor/productos.jsp").forward(request, response);
         }

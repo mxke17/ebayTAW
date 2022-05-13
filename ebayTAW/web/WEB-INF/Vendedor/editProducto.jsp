@@ -51,7 +51,7 @@
                                     selected = "selected";
                                 }
                                 %>
-                                <option <%= selected %> ><%= categoria.getName() %></option>
+                                <option value="<%=categoria.getCategoryID()%>" <%= selected %> ><%= categoria.getName() %></option>
                                 <%}%>
                             </select></td>
                     </tr>
@@ -73,20 +73,11 @@
                     </tr>
                     <tr>
                         <td><label for="">¿Vendido?</label></td>
-                        <%
-                            Boolean valor = producto.getIsSold();
-                            if (valor){ // Esta vendido
-                        %>
-                        <td><input type="radio" name="vendido" value="True" checked/>Vendido<br>
-                        <input type="radio" name="vendido" value="False" />En venta</td>
-                        <%
-                            } else { // No estaba vendido
-                        %>
-                        <td><input type="radio" name="vendido" value="True"/>Vendido<br>
-                        <input type="radio" name="vendido" value="False" checked/>En venta<br></td>
-                        <%
-                          }
-                        %>
+                        <%String checked = "";
+                        if (producto.getIsSold()){
+                            checked="checked";
+                        }%>
+                        <td><input  type="checkbox" name="vendido" <%= checked %>></td>
                     </tr>
                 </tbody>
             </table>

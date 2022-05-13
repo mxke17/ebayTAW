@@ -48,13 +48,9 @@ public class VendedorToEditarProductoServlet extends SampleTAWServlet {
             List<CategoriesDTO> categorias = null;
             categorias = this.cs.findAll();
             
-            if (idProducto != null && !request.getParameter("id").isEmpty()){ 
-                ProductsDTO producto = this.ps.buscarProducto(Integer.parseInt(idProducto));
-                request.setAttribute("producto", producto);
-                request.setAttribute("categorias", categorias);
-            } else { // CREAR
-                
-            }
+            ProductsDTO producto = this.ps.buscarProducto(Integer.parseInt(idProducto));
+            request.setAttribute("producto", producto);
+            request.setAttribute("categorias", categorias);
         }
         
         request.getRequestDispatcher("/WEB-INF/Vendedor/editProducto.jsp").forward(request, response);

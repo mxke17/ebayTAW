@@ -4,6 +4,7 @@
     Author     : mjura
 --%>
 
+<%@page import="DTO.CategoriesDTO"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="DTO.ProductsDTO"%>
@@ -57,17 +58,11 @@
         <!-- TABLA PRODUCTOS -->
         <div class="content">
             <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
-        <form method="post" action="ProductosVendedorServlet">
-            Titulo: <input type="text" name="filtroTitulo" value="">
-            <input type="submit" value="Filtrar por título">
-        </form>
-        
-        <br>
-        
-        
+
         <% 
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             
+            List<CategoriesDTO> categorias = (List)request.getAttribute("categorias");
             List<ProductsDTO> productos = (List)request.getAttribute("productos");
             if ( productos == null || productos.isEmpty()){
         %>
@@ -77,6 +72,57 @@
         <% 
             } else {
         %>
+        
+        <!-- FILTROS -->
+        <form method="post" action="ProductosVendedorServlet">
+            <table border="1">
+                <tbody>
+                    <tr>
+                        <td>Titulo:</td>
+                        <td><input type="text" name="title" value=""></td>
+                    </tr>
+                    <tr>
+                        <td>Categoria:</td>
+                        <td>
+                            <select name="categoryId">
+                                <option value="">?</option>
+                                <%for (CategoriesDTO categoria : categorias) {%>
+                                    <option value="<%=categoria.getCategoryID()%>"><%=categoria.getName()%></option>
+                                <%}%>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Precio inicial:</td>
+                        <td><input type="number" name="initialPrice" step="any" min="0"></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de inicio:</td>
+                        <td><input type="date" name="startDate"></td>
+                    </tr>
+                    <tr>
+                        <td>Fecha de fin:</td>
+                        <td><input type="date" name="finishDate"></td>
+                    </tr>
+                    <tr>
+                        <td>¿Vendido?</td>
+                        <td>
+                            <select name="isSold">
+                                <option value="">?</option>
+                                <option value="True">Si</option>
+                                <option value="False">No</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Filtrar"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        
+        <br>
+        
         <table border="1">
             <tr>
                 <th>Tituto</th>

@@ -52,12 +52,12 @@ public class VendedorProductoGuardarServlet extends SampleTAWServlet {
             String id = request.getParameter("id");
             String titulo = request.getParameter("titulo");
             String descripcion = request.getParameter("descripcion");
-            String categoria = request.getParameter("categoria");
+            String $categoria = request.getParameter("categoria");
             String precioInicial = request.getParameter("precioInicial");
             BigDecimal pInicial = new BigDecimal(precioInicial);
             String linkFoto = request.getParameter("linkFoto");
             String fechaInicio = request.getParameter("fechaInicio");
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
             Date fInicio = null;
             
             try {
@@ -73,10 +73,10 @@ public class VendedorProductoGuardarServlet extends SampleTAWServlet {
             } catch (ParseException ex) {
                 Logger.getLogger(VendedorProductoGuardarServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String vendido = request.getParameter("vendido");
-            Boolean v = Boolean.parseBoolean(vendido);
+            String $vendido = request.getParameter("vendido");
+            Boolean vendido = $vendido != null && !$vendido.isEmpty();
             
-            this.ps.editarProducto(Integer.parseInt(id), titulo, descripcion, categoria, pInicial, linkFoto, fInicio, fFin, v);
+            this.ps.editarProducto(Integer.parseInt(id), titulo, descripcion, linkFoto, Integer.parseInt($categoria), pInicial, fInicio, fFin, vendido);
             
             response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
         }
