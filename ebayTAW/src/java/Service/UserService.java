@@ -32,6 +32,9 @@ public class UserService {
     // Miguel y Cristobal
     public UserDTO comprobarCredenciales(String email, String pass) {
         Users usuario = this.uf.comprobarUsuario(email, pass);
+        if (usuario == null){
+            return null;
+        }
         return usuario.toDTO();
     }
 
