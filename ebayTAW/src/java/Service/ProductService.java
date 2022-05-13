@@ -43,6 +43,7 @@ public class ProductService {
         return listaDTO;
     }
 
+    // Borrar
     public List<ProductsDTO> listarProductos(String filtroTitulo) {
         List<Products> productos = null;
         if (filtroTitulo == null || filtroTitulo.isEmpty()) {
@@ -51,19 +52,6 @@ public class ProductService {
             productos = this.pf.findAllByTitulo(filtroTitulo);
         }
 
-
-        return this.listaEntityADTO(productos);
-    }
-
-
-    // Miguel
-    public List<ProductsDTO> listarProductos (String filtroTitulo, UserDTO vendedor){
-        List<Products> productos = null;
-        if (filtroTitulo == null || filtroTitulo.isEmpty()) {
-            productos = this.pf.findAllByUser(vendedor);
-        } else {
-            productos = this.pf.findByTitulo(filtroTitulo, vendedor);
-        }
 
         return this.listaEntityADTO(productos);
     }
@@ -91,6 +79,20 @@ public class ProductService {
         producto.setFinishDate(fechaFin);
         producto.setIsSold(vendido);
         this.pf.edit(producto);
+    }
+    
+    
+    // Miguel
+    public List<ProductsDTO> listarProductos(String title, UserDTO vendedor, Integer categoryId, BigDecimal initialPrice, Date startDate, Date finishDate, Boolean isSold) {
+        List<Products> productos;
+
+        if ((title == null || title.isEmpty()) && categoryId == null && initialPrice == null && startDate == null && finishDate == null && isSold == null) {
+            productos = this.pf.findAllByUser(vendedor);
+        } else {
+            productos = this.pf.findAll(title, vendedor.getUserID(), categoryId, initialPrice, startDate, finishDate, isSold);
+        }
+
+        return this.listaEntityADTO(productos);
     }
 
     //Cristobal

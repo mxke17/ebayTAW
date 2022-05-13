@@ -52,39 +52,31 @@
         </style>
         
     </head>
+    
+    <%
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        List<CategoriesDTO> categorias = (List)request.getAttribute("categorias");
+        List<ProductsDTO> productos = (List)request.getAttribute("productos");
+    %>
     <body>
         <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
         
         <!-- TABLA PRODUCTOS -->
         <div class="content">
             <h1>Bienvenidx, <%=vendedor.getUsername()%> </h1>
-
-        <% 
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             
-            List<CategoriesDTO> categorias = (List)request.getAttribute("categorias");
-            List<ProductsDTO> productos = (List)request.getAttribute("productos");
-            if ( productos == null || productos.isEmpty()){
-        %>
-        
-        <h2>No existen productos</h2>
-        
-        <% 
-            } else {
-        %>
-        
-        <!-- FILTROS -->
+            <!-- FILTROS -->
         <form method="post" action="ProductosVendedorServlet">
             <table border="1">
                 <tbody>
                     <tr>
                         <td>Titulo:</td>
-                        <td><input type="text" name="title" value=""></td>
+                        <td><input type="text" name="titulo" value=""></td>
                     </tr>
                     <tr>
                         <td>Categoria:</td>
                         <td>
-                            <select name="categoryId">
+                            <select name="idCategoria">
                                 <option value="">?</option>
                                 <%for (CategoriesDTO categoria : categorias) {%>
                                     <option value="<%=categoria.getCategoryID()%>"><%=categoria.getName()%></option>
@@ -94,20 +86,20 @@
                     </tr>
                     <tr>
                         <td>Precio inicial:</td>
-                        <td><input type="number" name="initialPrice" step="any" min="0"></td>
+                        <td><input type="number" name="precioInicial" step="any" min="0"></td>
                     </tr>
                     <tr>
                         <td>Fecha de inicio:</td>
-                        <td><input type="date" name="startDate"></td>
+                        <td><input type="date" name="fechaInicio"></td>
                     </tr>
                     <tr>
                         <td>Fecha de fin:</td>
-                        <td><input type="date" name="finishDate"></td>
+                        <td><input type="date" name="fechaFin"></td>
                     </tr>
                     <tr>
                         <td>¿Vendido?</td>
                         <td>
-                            <select name="isSold">
+                            <select name="vendido">
                                 <option value="">?</option>
                                 <option value="True">Si</option>
                                 <option value="False">No</option>
@@ -120,6 +112,17 @@
                 </tbody>
             </table>
         </form>
+
+        <% 
+            
+            if ( productos == null || productos.isEmpty()){
+        %>
+        
+        <h2>No existen productos</h2>
+        
+        <% 
+            } else {
+        %>
         
         <br>
         

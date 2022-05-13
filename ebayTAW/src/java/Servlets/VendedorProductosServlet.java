@@ -57,40 +57,46 @@ public class VendedorProductosServlet extends SampleTAWServlet {
             String titulo = request.getParameter("titulo");
             String $idCategoria = request.getParameter("idCategoria");
             Integer idCategoria = null;
-            if ($idCategoria != null || !$idCategoria.isEmpty()){
+            if ($idCategoria != null && !$idCategoria.isEmpty()){
                 idCategoria = Integer.parseInt($idCategoria);
             }
             
             String $precioInicial = request.getParameter("precioInicial");
             BigDecimal precioInicial = null;
-            if ($precioInicial != null || !$precioInicial.isEmpty()){
+            if ($precioInicial != null && !$precioInicial.isEmpty()){
                 precioInicial = new BigDecimal($precioInicial);
             }
             
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String $fechaInicio = request.getParameter("fechaInicio");
             Date fechaInicio = null;
-            try {
-                fechaInicio = format.parse($fechaInicio);
-            } catch (ParseException ex) {
-                Logger.getLogger(VendedorProductosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            if ($fechaInicio != null && !$fechaInicio.isEmpty()){
+                try {
+                    fechaInicio = format.parse($fechaInicio);
+                } catch (ParseException ex) {
+                    Logger.getLogger(VendedorProductosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+            
             
             String $fechaFin = request.getParameter("fechaFin");
             Date fechaFin = null;
-            try {
-                fechaFin = format.parse($fechaFin);
-            } catch (ParseException ex) {
-                Logger.getLogger(VendedorProductosServlet.class.getName()).log(Level.SEVERE, null, ex);
+            if ($fechaFin != null && !$fechaFin.isEmpty()){
+                try {
+                    fechaFin = format.parse($fechaFin);
+                } catch (ParseException ex) {
+                    Logger.getLogger(VendedorProductosServlet.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+            
             
             String $vendido = request.getParameter("vendido");
             Boolean vendido = null;
-            if ($vendido != null || !$vendido.isEmpty()){
+            if ($vendido != null && !$vendido.isEmpty()){
                 vendido = Boolean.parseBoolean($vendido);
             }
             
-            List<ProductsDTO> productos = this.productService.listarProductos(titulo, vendedor);
+            List<ProductsDTO> productos = this.productService.listarProductos(titulo, vendedor, idCategoria, precioInicial, fechaInicio, fechaFin, vendido);
             // FILTROS >>>
             
             
