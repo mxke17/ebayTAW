@@ -42,7 +42,7 @@ public class VendedorToCrearProductoServlet extends HttpServlet {
         
         
         request.setAttribute("categorias", categorias);
-        request.getRequestDispatcher("/WEB-INF/Vendedor/createProducto.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Vendedor/vendedor_crear_producto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

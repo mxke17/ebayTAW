@@ -102,7 +102,7 @@ public class VendedorProductosServlet extends SampleTAWServlet {
             
             request.setAttribute("categorias", categorias);
             request.setAttribute("productos", productos);
-            request.getRequestDispatcher("/WEB-INF/Vendedor/productos.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/Vendedor/vendedor_listado_productos.jsp").forward(request, response);
         }
     }
     

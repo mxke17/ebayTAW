@@ -28,7 +28,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
+        <jsp:include page="/WEB-INF/Vendedor/vendedor_header.jsp" />
         <h1>Listado de pujas del producto</h1>
         <table border="1">
             <thead>

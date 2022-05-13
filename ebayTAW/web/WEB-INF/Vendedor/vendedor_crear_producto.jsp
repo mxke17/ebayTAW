@@ -24,7 +24,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
+        <jsp:include page="/WEB-INF/Vendedor/vendedor_header.jsp" />
         <form method="post" action="ProductoCrearVendedorServlet">
             <table border="1">
                 <tbody>

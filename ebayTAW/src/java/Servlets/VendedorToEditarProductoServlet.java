@@ -53,7 +53,7 @@ public class VendedorToEditarProductoServlet extends SampleTAWServlet {
             request.setAttribute("categorias", categorias);
         }
         
-        request.getRequestDispatcher("/WEB-INF/Vendedor/editProducto.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Vendedor/vendedor_editar_producto.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

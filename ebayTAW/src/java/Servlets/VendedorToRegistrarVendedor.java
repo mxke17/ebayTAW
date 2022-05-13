@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author mjura
  */
 @WebServlet(name = "homeRegisterServlet", urlPatterns = {"/homeRegisterServlet"})
-public class homeRegisterServlet extends HttpServlet {
+public class VendedorToRegistrarVendedor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,8 +31,7 @@ public class homeRegisterServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("WEB-INF/Vendedor/registroVendedor.jsp").forward(request, response);
+        request.getRequestDispatcher("WEB-INF/Vendedor/vendedor_registro.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

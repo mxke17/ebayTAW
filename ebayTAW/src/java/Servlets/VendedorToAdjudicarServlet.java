@@ -45,7 +45,7 @@ public class VendedorToAdjudicarServlet extends SampleTAWServlet {
             request.setAttribute("producto", producto);
         }
         
-        request.getRequestDispatcher("/WEB-INF/Vendedor/adjudicar.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Vendedor/vendedor_adjudicar_venta.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -39,7 +39,7 @@ public class VendedorServlet extends SampleTAWServlet {
             throws ServletException, IOException {
         if (super.comprobarSession(request, response)){
 
-            request.getRequestDispatcher("WEB-INF/Vendedor/productos.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/Vendedor/vendedor_listado_productos.jsp").forward(request, response);
         }
     }
 

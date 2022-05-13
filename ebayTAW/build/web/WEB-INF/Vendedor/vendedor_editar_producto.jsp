@@ -23,7 +23,7 @@
         <title><%=vendedor.getUsername()%> page</title>
     </head>
     <body>
-        <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
+        <jsp:include page="/WEB-INF/Vendedor/vendedor_header.jsp" />
         
         <%
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

@@ -59,7 +59,7 @@
         List<ProductsDTO> productos = (List)request.getAttribute("productos");
     %>
     <body>
-        <jsp:include page="/WEB-INF/Vendedor/vendedor.jsp" />
+        <jsp:include page="/WEB-INF/Vendedor/vendedor_header.jsp" />
         
         <!-- TABLA PRODUCTOS -->
         <div class="content">
