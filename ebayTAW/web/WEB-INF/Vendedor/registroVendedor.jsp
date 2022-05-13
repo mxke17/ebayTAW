@@ -88,11 +88,11 @@
                         </tr>
                         <tr>
                             <td>Nombre:</td>
-                            <td><input required type="text" name="nombre" value="" /></td>
+                            <td><input type="text" name="nombre" value="" /></td>
                         </tr>
                         <tr>
                             <td>Apellidos:</td>
-                            <td><input required type="text" name="apellidos" value="" /></td>
+                            <td><input type="text" name="apellidos" value="" /></td>
                         </tr>
                         <tr>
                             <td>Genero:</td>

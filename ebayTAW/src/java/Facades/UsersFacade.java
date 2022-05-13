@@ -32,6 +32,7 @@ public class UsersFacade extends AbstractFacade<Users> {
         super(Users.class);
     }
     
+    // Miguel y Cristobal
     public Users comprobarUsuario (String email, String pass){
         Query q;
         q = this.getEntityManager().createQuery("select u from Users u where u.email = :email and u.password = :clave");
@@ -45,6 +46,7 @@ public class UsersFacade extends AbstractFacade<Users> {
         }
     }
     
+    // Cristobal
     public List<Users> getUsuarios(String rol, String username, String email, String name, 
             String surname, String gender, String street, Integer number, 
             String city, String region, Integer postalCode){

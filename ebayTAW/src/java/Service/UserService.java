@@ -29,28 +29,62 @@ public class UserService {
     @EJB
     UsersFacade uf;
 
+    // Miguel y Cristobal
     public UserDTO comprobarCredenciales(String email, String pass) {
         Users usuario = this.uf.comprobarUsuario(email, pass);
         return usuario.toDTO();
     }
 
+    // Miguel
+    
     public void crearVendedor(String username, String email, String password,
             String nombre, String apellidos, String genero, String calle,
-            Integer numero, String ciudad, Integer cpostal, String region) {
+            String numero, String ciudad, String cpostal, String region) {
         Users vendedor = new Users();
         // Relleno los datos
         vendedor.setRol("Vendedor");
         vendedor.setUsername(username);
         vendedor.setEmail(email);
         vendedor.setPassword(password);
+        
+        if (nombre.isEmpty()){
+            nombre = null;
+        }
         vendedor.setName(nombre);
+        
+        if (apellidos.isEmpty()){
+            apellidos = null;
+        }
         vendedor.setSurname(apellidos);
+        
         vendedor.setGender(genero);
+        
+        if (calle.isEmpty()){
+            calle = null;
+        }
         vendedor.setStreet(calle);
-        vendedor.setNumber(numero);
+        
+        if (numero.isEmpty()){
+            numero = null;
+        }
+        vendedor.setNumber(Integer.parseInt(numero));
+        
+        if (ciudad.isEmpty()){
+            ciudad = null;
+        }
         vendedor.setCity(ciudad);
+        
+        if (cpostal.isEmpty()){
+            cpostal = null;
+        }
+        vendedor.setPostalCode(Integer.parseInt(cpostal));
+        
+        if (region.isEmpty()){
+            region = null;
+        }
         vendedor.setRegion(region);
-        vendedor.setPostalCode(cpostal);
+        
+
         this.uf.create(vendedor);
     }
 

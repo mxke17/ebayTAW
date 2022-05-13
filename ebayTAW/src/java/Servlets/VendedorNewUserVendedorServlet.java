@@ -34,31 +34,23 @@ public class VendedorNewUserVendedorServlet extends SampleTAWServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if(super.comprobarSession(request, response)){
             String nick = request.getParameter("nick");
             String email = request.getParameter("email");
             String pass = request.getParameter("pass");
             String nombre = request.getParameter("nombre");
             String apellidos = request.getParameter("apellidos");
             String genero = request.getParameter("genero");
-            //Convertir
             String calle = request.getParameter("calle");
             String $numero = request.getParameter("numero");
-            //Convertir
-            int numero = Integer.parseInt($numero);
             String ciudad = request.getParameter("ciudad");
             String $cpostal = request.getParameter("cPostal");
-            //Convertir
-            int cpostal = Integer.parseInt($cpostal);
             String region = request.getParameter("region");
             
             
-            if ((nick != null || !nick.isEmpty()) && (email != null || !email.isEmpty()) && (pass != null || !pass.isEmpty())){ // Nick, email y pass rellenas
-                this.us.crearVendedor(nick, email, pass, nombre, apellidos, genero, calle, numero, ciudad, cpostal, region);
-                response.sendRedirect("/LoginServlet");
-            }
+            // Nick, email y pass estarán rellenas por obligacion de html
+            this.us.crearVendedor(nick, email, pass, nombre, apellidos, genero, calle, $numero, ciudad, $cpostal, region);
             
-        }
+            request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
