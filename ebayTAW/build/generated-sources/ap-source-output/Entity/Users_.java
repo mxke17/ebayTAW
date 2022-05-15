@@ -2,14 +2,16 @@ package Entity;
 
 import Entity.Bids;
 import Entity.Categoriesuser;
+import Entity.Mensaje;
 import Entity.Products;
 import Entity.Studies;
+import Entity.Usuarioslista;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2022-05-12T20:38:19")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2022-05-15T10:42:39")
 @StaticMetamodel(Users.class)
 public class Users_ { 
 
@@ -17,6 +19,7 @@ public class Users_ {
     public static volatile SingularAttribute<Users, String> gender;
     public static volatile SingularAttribute<Users, String> city;
     public static volatile ListAttribute<Users, Studies> studiesList;
+    public static volatile ListAttribute<Users, Mensaje> mensajeList;
     public static volatile SingularAttribute<Users, Integer> postalCode;
     public static volatile ListAttribute<Users, Bids> bidsList;
     public static volatile SingularAttribute<Users, Integer> userID;
@@ -26,6 +29,7 @@ public class Users_ {
     public static volatile ListAttribute<Users, Categoriesuser> categoriesuserList;
     public static volatile SingularAttribute<Users, String> surname;
     public static volatile SingularAttribute<Users, String> street;
+    public static volatile ListAttribute<Users, Usuarioslista> usuarioslistaList;
     public static volatile SingularAttribute<Users, String> name;
     public static volatile SingularAttribute<Users, String> region;
     public static volatile SingularAttribute<Users, String> email;

@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/cristobal/Desktop/universidad/Tercero/Segundo%20Cuatrimestre/TAW/ebayTAW/ebayTAW/src/java/Servlets/AdministradorProductosServlet.java</file>
-            <file>file:/C:/Users/cristobal/Desktop/universidad/Tercero/Segundo%20Cuatrimestre/TAW/ebayTAW/ebayTAW/web/WEB-INF/Administrador/administrador_productos.jsp</file>
-            <file>file:/C:/Users/cristobal/Desktop/universidad/Tercero/Segundo%20Cuatrimestre/TAW/ebayTAW/ebayTAW/src/java/Entity/Users.java</file>
-            <file>file:/C:/Users/cristobal/Desktop/universidad/Tercero/Segundo%20Cuatrimestre/TAW/ebayTAW/ebayTAW/src/java/DTO/ProductsDTO.java</file>
-            <file>file:/C:/Users/cristobal/Desktop/universidad/Tercero/Segundo%20Cuatrimestre/TAW/ebayTAW/ebayTAW/src/java/Entity/Bids.java</file>
-            <file>file:/C:/Users/cristobal/Desktop/universidad/Tercero/Segundo%20Cuatrimestre/TAW/ebayTAW/ebayTAW/src/java/Service/ProductService.java</file>
-            <file>file:/C:/Users/cristobal/Desktop/universidad/Tercero/Segundo%20Cuatrimestre/TAW/ebayTAW/ebayTAW/src/java/Facades/ProductsFacade.java</file>
+            <file>file:/C:/Users/power/Desktop/TAW/ebayTAW/ebayTAW/src/java/Servlets/MarketingMensajesRecibidosServlet.java</file>
+            <file>file:/C:/Users/power/Desktop/TAW/ebayTAW/ebayTAW/web/WEB-INF/Marketing/marketing_menu.jsp</file>
+            <file>file:/C:/Users/power/Desktop/TAW/ebayTAW/ebayTAW/web/WEB-INF/Marketing/marketing_header.jsp</file>
         </group>
     </open-files>
 </project-private>

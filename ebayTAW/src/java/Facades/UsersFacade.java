@@ -5,7 +5,9 @@
  */
 package Facades;
 
+import DTO.UserDTO;
 import Entity.Users;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -146,5 +148,39 @@ public class UsersFacade extends AbstractFacade<Users> {
         }
        
         return q.getResultList();
+    }
+
+    public List<UserDTO> listarUsuariosFiltrado(String nombreUsuario, String orderBy) {
+        
+        String queryStr = "SELECT u FROM Users u ";
+        String where = "WHERE u.name like '%" + nombreUsuario +"%' ";
+        String order = "ORDER BY u." + orderBy;
+         
+        if(nombreUsuario != null && !nombreUsuario.isEmpty())
+            queryStr += where;
+            
+        if(orderBy != null && !orderBy.isEmpty()) 
+            queryStr += order;
+            
+        Query q = this.getEntityManager().createQuery(queryStr);
+            
+        
+        //if(nombreUsuario != null && !nombreUsuario.isEmpty())
+        //    q.setParameter("nombreUsuario", nombreUsuario);
+        
+       // if(orderBy != null && !orderBy.isEmpty()) 
+        //    q.setParameter("orderBy", orderBy);
+            
+            
+        List<Users> lista = q.getResultList();
+        
+        List<UserDTO> resultado = new ArrayList<>();
+        for(Users u : lista)
+            resultado.add(u.toDTO());
+        
+        
+        return resultado;
+        
+        
     }
 }

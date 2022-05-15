@@ -72,7 +72,8 @@
             <li style="float:right"><a href="LogoutServlet">Salir</a></li>
             <li style="float:right"><a href="AdministradorUsuariosServlet">Lista de usuarios</a></li>
             <li style="float:right"><a href="AdministradorProductosServlet">Lista de productos</a></li>
-            <li style="float:right"><a href="AdministradorCategoriasServlet">Lista de categorias</a></li>  
+            <li style="float:right"><a href="AdministradorCategoriasServlet">Lista de categorias</a></li>
+            <li style="float:right"><a href="MarketingMensajesRecibidosServlet?Usuario=<%= admin.getUserID()%>">Mensajes Recibidos</a></li>
         </div>
 
 <!--        <div class="content">

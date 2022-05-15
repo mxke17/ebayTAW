@@ -8,6 +8,7 @@ package Service;
 import DTO.UserDTO;
 import Entity.Users;
 import Facades.UsersFacade;
+import Facades.UsuarioslistaFacade;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,8 +27,8 @@ public class UserService {
         return lista.stream().map(u -> u.toDTO()).collect(Collectors.toList());
     }
 
-    @EJB
-    UsersFacade uf;
+    @EJB UsersFacade uf;
+    @EJB UsuarioslistaFacade ulf;
 
     public UserDTO comprobarCredenciales(String email, String pass) {
         Users usuario = this.uf.comprobarUsuario(email, pass);
@@ -167,5 +168,16 @@ public class UserService {
         System.out.println(rol + ", " + username + ", " + email + ", " + name + ", " + surname + ", " + gender + ", " + street + ", " + number + ", " + city + ", " + region + ", " + postalCode);
         
         this.uf.create(user);
+    }
+
+    // Antonio
+    public List<UserDTO> usuariosDTODeUnaLista(int idList) {
+       
+        return this.ulf.getUsuariosDTOEnUnaLista(idList);
+        
+    }
+
+    public List<UserDTO> listarUsuariosFiltrado(String nombreUsuario, String orderBy) {
+        return this.uf.listarUsuariosFiltrado(nombreUsuario,orderBy);
     }
 }
