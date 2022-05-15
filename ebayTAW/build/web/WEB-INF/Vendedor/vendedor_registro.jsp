@@ -110,7 +110,7 @@
                         </tr>
                         <tr>
                             <td>Numero:</td>
-                            <td><input type="number" name="numero" value="" /></td>
+                            <td><input type="number" name="numero" value="" step="any" min="0" /></td>
                         </tr>
                         <tr>
                             <td>Ciudad:</td>
@@ -118,7 +118,7 @@
                         </tr>
                         <tr>
                             <td>Codigo Postal:</td>
-                            <td><input type="number" name="cPostal" value="" /></td>
+                            <td><input type="number" name="cPostal" value="" step="any" min="0" /></td>
                         </tr>
                         <tr>
                             <td>Region:</td>

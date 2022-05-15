@@ -3,20 +3,26 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorToCrearProductoServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/LoginServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorProductoBorrarServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorNewUserVendedorServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/LogoutServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorAdjudicarVentaServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/SampleTAWServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorToRegistrarVendedor.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorToEditarProductoServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorProductosServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorToAdjudicarServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorProductoGuardarServlet.java</file>
-            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorProductoCrearServlet.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Service/ProductService.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/StudiesFacade.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/CategoriesuserFacade.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Service/UserService.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/web/WEB-INF/Vendedor/vendedor_registro.jsp</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/BidsFacade.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Entity/Users.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Entity/Categories.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/ProductsFacade.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Service/CategoryService.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Entity/Bids.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Entity/Studies.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/DTO/ProductsDTO.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/AbstractFacade.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Entity/Products.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/DTO/CategoriesDTO.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/UsersFacade.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Servlets/VendedorToHome.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/DTO/UserDTO.java</file>
+            <file>file:/C:/Users/mjura/Documents/GitHub/ebayTAW/ebayTAW/src/java/Facades/CategoriesFacade.java</file>
         </group>
     </open-files>
 </project-private>

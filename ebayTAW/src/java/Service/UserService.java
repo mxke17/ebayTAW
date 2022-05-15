@@ -66,20 +66,23 @@ public class UserService {
         }
         vendedor.setStreet(calle);
         
-        if (numero.isEmpty()){
-            numero = null;
+        if (!numero.isEmpty()){
+            vendedor.setNumber(Integer.parseInt(numero));
+        } else { 
+            vendedor.setNumber(null);
         }
-        vendedor.setNumber(Integer.parseInt(numero));
         
         if (ciudad.isEmpty()){
             ciudad = null;
         }
         vendedor.setCity(ciudad);
         
-        if (cpostal.isEmpty()){
-            cpostal = null;
+        if (!cpostal.isEmpty()){
+            vendedor.setPostalCode(Integer.parseInt(cpostal));
+        } else {
+            vendedor.setPostalCode(null);
         }
-        vendedor.setPostalCode(Integer.parseInt(cpostal));
+        
         
         if (region.isEmpty()){
             region = null;
