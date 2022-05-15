@@ -3,34 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-// MIGUEL JURADO VAZQUEZ Y CRISTOBAL MARTÍN ARENAS
-
 package Servlets;
 
-import DTO.UserDTO;
-import Entity.Users;
-import Facades.UsersFacade;
-import Service.UserService;
+import DTO.ListausuarioDTO;
+import Service.ListaUsuariosService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author mjura
+ * @author power
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "MarketingElegirListaMensajeServlet", urlPatterns = {"/MarketingElegirListaMensajeServlet"})
+public class MarketingElegirListaMensajeServlet extends HttpServlet {
 
-    @EJB UserService us;
-
+    @EJB ListaUsuariosService lu;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,34 +35,14 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String textoMensaje = request.getParameter("mensaje");
         
-        UserDTO usuario = this.us.comprobarCredenciales(email, pass);
-        
-        if (usuario == null){
-            String msjError = "Email o contraseña invalidas";
-            request.setAttribute("error", msjError);
-            request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
-            
-        } else if(usuario.getRol().equals("Vendedor")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-            
-        } else if(usuario.getRol().equals("Administrador")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/AdministradorUsuariosServlet");
-            
-        } else if(usuario.getRol().equals("Marketing")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/MarketingMenuServlet");
-            
-        }
+        List<ListausuarioDTO> listas = this.lu.todasLasListas();
+        request.setAttribute("listas", listas);
+        request.setAttribute("textoMensaje", textoMensaje);
+        request.getRequestDispatcher("WEB-INF/Marketing/marketing_elegir_listas.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

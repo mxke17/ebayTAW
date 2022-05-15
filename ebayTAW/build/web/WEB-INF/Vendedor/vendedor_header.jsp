@@ -74,6 +74,7 @@
             <li style="float:right"><a href="LogoutServlet">Salir</a></li>
             <li style="float:right"><a href="ProductosVendedorServlet">Lista de productos</a></li>
             <li style="float:right"><a href="ToCrearProducto">Nuevo producto</a></li>
+            <li style="float:right"><a href="MarketingMensajesRecibidosServlet?Usuario=<%= vendedor.getUserID()%>">Mensajes Recibidos</a></li>
             
         </div>
 

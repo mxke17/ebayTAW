@@ -3,34 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-// MIGUEL JURADO VAZQUEZ Y CRISTOBAL MARTÍN ARENAS
-
 package Servlets;
 
 import DTO.UserDTO;
-import Entity.Users;
-import Facades.UsersFacade;
+import Entity.Mensaje;
+import Service.MensajeService;
 import Service.UserService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author mjura
+ * @author power
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "MarketingBorrarMensajeServlet", urlPatterns = {"/MarketingBorrarMensajeServlet"})
+public class MarketingBorrarMensajeServlet extends HttpServlet {
 
+    @EJB MensajeService ms;
     @EJB UserService us;
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,34 +38,25 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        //Tomar id mensaje
+        int idMensaje  = Integer.parseInt(request.getParameter("idMensaje"));
+        //Traer id del usuario de la sesion
+        int id = Integer.parseInt(request.getParameter("Usuario"));
+        UserDTO usuarioActual = this.us.getUsuario(id);
         
-        UserDTO usuario = this.us.comprobarCredenciales(email, pass);
+        //BorrarMensaje
+        this.ms.borrarMensaje(idMensaje);
         
-        if (usuario == null){
-            String msjError = "Email o contraseña invalidas";
-            request.setAttribute("error", msjError);
-            request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
-            
-        } else if(usuario.getRol().equals("Vendedor")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-            
-        } else if(usuario.getRol().equals("Administrador")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/AdministradorUsuariosServlet");
-            
-        } else if(usuario.getRol().equals("Marketing")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/MarketingMenuServlet");
-            
-        }
+        //Traemos mis mensajes
+        List<Mensaje> misMensajes = this.ms.misMensajes(usuarioActual);
+        //Pasar la lista 
+        request.setAttribute("misMensajes", misMensajes);
+        request.getRequestDispatcher("WEB-INF/Marketing/usuario_ver_mis_mensajes.jsp").forward(request, response);
+        
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

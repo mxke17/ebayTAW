@@ -3,34 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-// MIGUEL JURADO VAZQUEZ Y CRISTOBAL MARTÍN ARENAS
-
 package Servlets;
 
 import DTO.UserDTO;
-import Entity.Users;
-import Facades.UsersFacade;
+import Entity.Listausuarios;
+import Service.ListaUsuariosService;
 import Service.UserService;
+import Service.UsuarioListaService;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author mjura
+ * @author power
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "MarketingEditarListaDesdeVerServlet", urlPatterns = {"/MarketingEditarListaDesdeVerServlet"})
+public class MarketingEditarListaDesdeVerServlet extends HttpServlet {
 
-    @EJB UserService us;
-
+    @EJB UserService userService;
+    @EJB ListaUsuariosService lu;
+    @EJB UsuarioListaService uls;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,34 +41,41 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String email = request.getParameter("email");
-        String pass = request.getParameter("password");
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
         
-        UserDTO usuario = this.us.comprobarCredenciales(email, pass);
+        //Tomar id de la lista de usuarios
+        Integer idList = Integer.parseInt(request.getParameter("idList"));
+        //Traemos la lista
+        Listausuarios lista = lu.getLista(idList);
         
-        if (usuario == null){
-            String msjError = "Email o contraseña invalidas";
-            request.setAttribute("error", msjError);
-            request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
+        // Todos los usuarios filtrados según NOMBREUSUARIO y ORDERBY
+        List<UserDTO> usuarios = this.userService.listarUsuarios();
+
+        //Traemos los usuarios de la Usuariolista
+        List<UserDTO> usuarioslista = this.userService.usuariosDTODeUnaLista(idList);
+        
+        //Quitamos los que estan en la lista
+        List<UserDTO> usuariosRestante = new ArrayList();
+        usuariosRestante.addAll(usuarios);
+        
+        for(UserDTO ul : usuarioslista )
+            for(UserDTO u : usuarios )
+                if(ul.getUserID() == u.getUserID())
+                    usuariosRestante.remove(u);
+                
+        
+        //Pasamos los parámetros al JSP
+        request.setAttribute("usuarioslista", usuarioslista);
+        request.setAttribute("usuarios", usuariosRestante);
+        request.setAttribute("fname", lista.getUsername());
+        request.setAttribute("id", idList);
+        
             
-        } else if(usuario.getRol().equals("Vendedor")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath()+"/ProductosVendedorServlet");
-            
-        } else if(usuario.getRol().equals("Administrador")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/AdministradorUsuariosServlet");
-            
-        } else if(usuario.getRol().equals("Marketing")){
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario);
-            response.sendRedirect(request.getContextPath() + "/MarketingMenuServlet");
-            
-        }
+        //Lanzamos el JSP
+        request.getRequestDispatcher("WEB-INF/Marketing/marketing_editar_lista.jsp").forward(request, response);
+   
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,18 +1,16 @@
 <%-- 
-    Document   : vendedor
-    Created on : 27-abr-2022, 12:00:56
-    Author     : mjura
+    Document   : marketing_header
+    Created on : 12-may-2022, 13:31:34
+    Author     : Antonio
 --%>
-
-<!-- MIGUEL JURADO VAZQUEZ -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DTO.UserDTO"%>
 
 <!DOCTYPE html>
 <%
-    UserDTO vendedor = (UserDTO)session.getAttribute("usuario");
-    if (vendedor == null){
+    UserDTO marketing = (UserDTO)session.getAttribute("usuario");
+    if (marketing == null){
         response.sendRedirect(request.getContextPath());
     }
 %>
@@ -22,7 +20,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--meta http-equiv="Content-Type" content="text/html; charset=UTF-8"-->
-        <title><%=vendedor.getUsername()%> page</title>
+        <title><%=marketing.getUsername()%> page</title>
         
         <style>
             * {
@@ -72,14 +70,18 @@
         
         <div class="topnav">
             <li style="float:right"><a href="LogoutServlet">Salir</a></li>
-            <li style="float:right"><a href="ProductosVendedorServlet">Lista de productos</a></li>
-            <li style="float:right"><a href="ToCrearProducto">Nuevo producto</a></li>
-            <li style="float:right"><a href="MarketingMensajesRecibidosServlet?Usuario=<%= vendedor.getUserID()%>">Mensajes Recibidos</a></li>
+            <li style="float:right"><a href="MarketingRedactarMensajeServlet">Crear un nuevo mensaje</a></li> 
+            <li style="float:right"><a href="MarketingVerListasServlet">Ver listas</a></li>
+            <li style="float:right"><a href="MarketingCrearServlet">Crear nueva lista</a></li>
+            <li style="float:right"><a href="MarketingMensajesRecibidosServlet?Usuario=<%= marketing.getUserID()%>">Mensajes Recibidos</a></li>
+            <li style="float:right"><a href="MarketingMenuServlet">Menu</a></li>
+
             
+ 
         </div>
 
         <div class="content">
-            <p>Session ID: <%=session.getId()%></p>
+            <!-- <p>Session ID: <%=session.getId()%></p> --->
         </div>
     </body>
 </html>
